@@ -1,15 +1,18 @@
 import { PrismaClient, User } from 'generated/prisma';
 import { UserRepository } from './user.repository.interface';
+import { PrismaService } from '../../db/prisma/prisma.service';
+import { Injectable } from '@nestjs/common';
 
 /**
  * No AppModule podemos definir para que toda vez que o UserRepository for chamado,
  * ele vai devolver o UserPrismaRepository
  */
+@Injectable()
 export class UserPrismaRepository implements UserRepository {
-  constructor(private readonly prisma: PrismaClient) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   create(user: User): Promise<User> {
-    return this.prisma.user.create({
+    const created = this.prisma.user.create({
       data: {
         id: user.id,
         name: user.name,
@@ -18,9 +21,10 @@ export class UserPrismaRepository implements UserRepository {
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
         deletedAt: user.deletedAt,
-        accountId: user.accountId,
       },
     });
+
+    return created;
   }
 
   findByEmail(email: string): Promise<User | null> {
