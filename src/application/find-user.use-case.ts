@@ -3,7 +3,7 @@ import { UserRepository } from '../domain/repositories/user.repository.interface
 import { User } from '../domain/entities/user.entity';
 
 @Injectable()
-export class UserFinder {
+export class FindUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async findById(id: string): Promise<User | null> {

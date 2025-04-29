@@ -2,8 +2,9 @@ import { PrismaService } from 'src/db/prisma/prisma.service';
 import { UserController } from '../../interfaces/user.controller';
 import { Module } from '@nestjs/common';
 import { UserPrismaRepository } from '../repositories/user.prisma.repository';
-import { UserCreator } from '../../application/user.creator';
-import { UserFinder } from '../../application/UserFinder';
+import { CreateUserUseCase } from '../../application/create-user.use-case';
+import { FindUserUseCase } from '../../application/find-user.use-case';
+import { UniqueEmailValidator } from '../../interfaces/request-validator/unique-email.validator';
 
 @Module({
   controllers: [UserController],
@@ -14,15 +15,16 @@ import { UserFinder } from '../../application/UserFinder';
       useClass: UserPrismaRepository,
     },
     {
-      provide: UserCreator,
-      useFactory: (repo) => new UserCreator(repo),
+      provide: CreateUserUseCase,
+      useFactory: (repo) => new CreateUserUseCase(repo),
       inject: ['UserRepository'],
     },
     {
-      provide: UserFinder,
-      useFactory: (repo) => new UserFinder(repo),
+      provide: FindUserUseCase,
+      useFactory: (repo) => new FindUserUseCase(repo),
       inject: ['UserRepository'],
     },
+    UniqueEmailValidator,
   ],
 })
 export class UserModule {}

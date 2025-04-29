@@ -1,16 +1,16 @@
 import { Body, Controller, Post, Inject, Get, Param } from '@nestjs/common';
-import { UserCreator } from '../application/user.creator';
+import { CreateUserUseCase } from '../application/create-user.use-case';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { UserFinder } from '../application/UserFinder';
+import { FindUserUseCase } from '../application/find-user.use-case';
 
 @Controller('users')
 export class UserController {
   constructor(
-    @Inject(UserCreator)
-    private readonly createUserUseCase: UserCreator,
+    @Inject(CreateUserUseCase)
+    private readonly createUserUseCase: CreateUserUseCase,
 
-    @Inject(UserFinder)
-    private readonly findUserUseCase: UserFinder,
+    @Inject(FindUserUseCase)
+    private readonly findUserUseCase: FindUserUseCase,
   ) {}
 
   @Post()
