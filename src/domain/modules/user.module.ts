@@ -2,7 +2,8 @@ import { PrismaService } from 'src/db/prisma/prisma.service';
 import { UserController } from '../../interfaces/user.controller';
 import { Module } from '@nestjs/common';
 import { UserPrismaRepository } from '../repositories/user.prisma.repository';
-import { CreateUserUseCase } from '../../application/create-user.usecase';
+import { UserCreator } from '../../application/user.creator';
+import { UserFinder } from '../../application/UserFinder';
 
 @Module({
   controllers: [UserController],
@@ -13,8 +14,13 @@ import { CreateUserUseCase } from '../../application/create-user.usecase';
       useClass: UserPrismaRepository,
     },
     {
-      provide: CreateUserUseCase,
-      useFactory: (repo) => new CreateUserUseCase(repo),
+      provide: UserCreator,
+      useFactory: (repo) => new UserCreator(repo),
+      inject: ['UserRepository'],
+    },
+    {
+      provide: UserFinder,
+      useFactory: (repo) => new UserFinder(repo),
       inject: ['UserRepository'],
     },
   ],

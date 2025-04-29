@@ -1,7 +1,7 @@
-import { PrismaClient, User } from 'generated/prisma';
 import { UserRepository } from './user.repository.interface';
 import { PrismaService } from '../../db/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { User } from '../entities/user.entity';
 
 /**
  * No AppModule podemos definir para que toda vez que o UserRepository for chamado,
@@ -10,6 +10,14 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class UserPrismaRepository implements UserRepository {
   constructor(private readonly prisma: PrismaService) {}
+
+  findById(id: string): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 
   create(user: User): Promise<User> {
     const created = this.prisma.user.create({
@@ -28,6 +36,10 @@ export class UserPrismaRepository implements UserRepository {
   }
 
   findByEmail(email: string): Promise<User | null> {
-    throw new Error('Method not implemented.');
+    return this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
   }
 }

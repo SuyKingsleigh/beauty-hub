@@ -11,7 +11,7 @@ interface CreateUserInput {
  * Define o cenário de criação de um usuário
  */
 
-export class CreateUserUseCase {
+export class UserCreator {
   // esse UserRepository é injetado via AppModule
   constructor(private readonly userRepository: UserRepository) {}
 
