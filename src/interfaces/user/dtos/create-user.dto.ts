@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { UniqueEmail } from '../request-validator/unique-email.validator';
+import { UniqueEmail } from '../../request-validator/unique-email.validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -10,5 +10,5 @@ export class CreateUserDto {
   email: string;
 
   @IsNotEmpty()
-  passwordHash: string;
+  password: string;
 }

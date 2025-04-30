@@ -1,7 +1,7 @@
 import { UserRepository } from './user.repository.interface';
 import { PrismaService } from '../../db/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { User } from '../entities/user.entity';
+import { User } from '../entities/user/user.entity';
 
 /**
  * No AppModule podemos definir para que toda vez que o UserRepository for chamado,

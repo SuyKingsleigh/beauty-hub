@@ -1,10 +1,11 @@
 import { UserRepository } from 'src/domain/repositories/user.repository.interface';
-import { User } from '../domain/entities/user.entity';
+import { User } from '../../domain/entities/user/user.entity';
+import { HashGenerator } from '../../domain/entities/authentication/hash-generator';
 
 interface CreateUserInput {
   name: string;
   email: string;
-  passwordHash: string;
+  password: string;
 }
 
 /**
@@ -13,15 +14,20 @@ interface CreateUserInput {
 
 export class CreateUserUseCase {
   // esse UserRepository é injetado via AppModule
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly hashGenerator: HashGenerator,
+  ) {}
 
   async execute(input: CreateUserInput): Promise<User> {
     const now = new Date();
+    const passwordHash = await this.hashGenerator.hash(input.password);
+
     const user = new User(
       undefined,
       input.name,
       input.email,
-      input.passwordHash,
+      passwordHash,
       now,
     );
     return await this.userRepository.create(user);

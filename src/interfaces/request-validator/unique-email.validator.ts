@@ -6,7 +6,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { FindUserUseCase } from '../../application/find-user.use-case';
+import { FindUserUseCase } from '../../application/user/find-user.use-case';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
