@@ -30,6 +30,6 @@ import { AuthModule } from './auth.module';
     UniqueEmailValidator,
   ],
   // Essa dependencia é usada no AuthModule
-  exports: ['UserRepository'],
+  exports: ['UserRepository', FindUserUseCase],
 })
 export class UserModule {}

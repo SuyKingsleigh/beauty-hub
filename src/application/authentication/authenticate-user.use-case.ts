@@ -23,7 +23,6 @@ export class AuthenticateUserUseCase {
 
     const token = await this.jwt.generate({
       id: user.id,
-      email: user.email,
     });
 
     return { token };

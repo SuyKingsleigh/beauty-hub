@@ -4,6 +4,6 @@ export const CurrentUser = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access
-    return request.user; // ← JWT payload ou user carregado
+    return request.currentUser; // ← JWT payload ou user carregado
   },
 );

@@ -5,7 +5,7 @@ import {
   Inject,
   Get,
   Param,
-  UseGuards,
+  UseGuards, UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserUseCase } from '../../application/user/create-user.use-case';
 import { CreateUserDto } from './dtos/create-user.dto';
