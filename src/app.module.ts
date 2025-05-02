@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './domain/modules/user.module';
-import { AuthModule } from './domain/modules/auth.module';
+import { UserModule } from './domain/user/user.module';
+import { AuthModule } from './domain/authentication/entities/auth.module';
 import { CurrentUserInterceptor } from './interfaces/authentication/current-user.interceptor';
 
 @Module({

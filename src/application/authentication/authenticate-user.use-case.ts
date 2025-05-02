@@ -1,6 +1,6 @@
-import { UserRepository } from '../../domain/repositories/user.repository.interface';
-import { HashComparer } from '../../domain/entities/authentication/bcrypt-hash-comparer';
-import { JwtTokenGenerator } from '../../domain/entities/authentication/jwt-token-generator';
+import { UserRepository } from '../../domain/user/repository/user.repository.interface';
+import { HashComparer } from '../../domain/authentication/entities/bcrypt-hash-comparer';
+import { JwtTokenGenerator } from '../../domain/authentication/entities/jwt-token-generator';
 
 export interface AuthInput {
   email: string;

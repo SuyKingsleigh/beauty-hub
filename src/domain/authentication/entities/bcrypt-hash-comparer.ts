@@ -1,4 +1,4 @@
-import { HashComparerInterface } from './interfaces/hash-comparer.interface';
+import { HashComparerInterface } from '../interfaces/hash-comparer.interface';
 import * as bcrypt from 'bcrypt';
 
 export class HashComparer implements HashComparerInterface {

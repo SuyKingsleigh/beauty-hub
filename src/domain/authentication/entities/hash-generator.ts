@@ -1,4 +1,4 @@
-import { HashGeneratorInterface } from './interfaces/hash-generator.interface';
+import { HashGeneratorInterface } from '../interfaces/hash-generator.interface';
 import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 

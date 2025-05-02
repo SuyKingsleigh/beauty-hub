@@ -1,11 +1,11 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { AuthenticationController } from '../../interfaces/authentication/authentication.controller';
-import { HashComparer } from '../entities/authentication/bcrypt-hash-comparer';
-import { JwtTokenGenerator } from '../entities/authentication/jwt-token-generator';
-import { AuthenticateUserUseCase } from '../../application/authentication/authenticate-user.use-case';
-import { UserModule } from './user.module';
+import { AuthenticationController } from '../../../interfaces/authentication/authentication.controller';
+import { HashComparer } from './bcrypt-hash-comparer';
+import { JwtTokenGenerator } from './jwt-token-generator';
+import { AuthenticateUserUseCase } from '../../../application/authentication/authenticate-user.use-case';
+import { UserModule } from '../../user/user.module';
 import { PassportModule } from '@nestjs/passport';
-import { JwtStrategy } from '../../application/authentication/jwt-strategy';
+import { JwtStrategy } from '../../../application/authentication/jwt-strategy';
 
 @Module({
   controllers: [AuthenticationController],

@@ -1,7 +1,7 @@
 import { UserRepository } from './user.repository.interface';
-import { PrismaService } from '../../db/prisma/prisma.service';
+import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { User } from '../entities/user/user.entity';
+import { User } from '../entities/user.entity';
 
 /**
  * No AppModule podemos definir para que toda vez que o UserRepository for chamado,
@@ -13,32 +13,33 @@ export class UserPrismaRepository implements UserRepository {
 
   findById(id: string): Promise<User | null> {
     return this.prisma.user.findUnique({
-      where: {
-        id,
+      where: { id },
+      include: {
+        account: true,
       },
     });
   }
 
   create(user: User): Promise<User> {
-    const created = this.prisma.user.create({
+    return this.prisma.user.create({
       data: {
         id: user.id,
         name: user.name,
         email: user.email,
+        accountId: user.accountId,
         passwordHash: user.passwordHash,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
         deletedAt: user.deletedAt,
       },
     });
-
-    return created;
   }
 
   findByEmail(email: string): Promise<User | null> {
     return this.prisma.user.findUnique({
-      where: {
-        email,
+      where: { email },
+      include: {
+        account: true,
       },
     });
   }

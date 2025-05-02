@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { TokenGeneratorInterface } from './interfaces/token-generator.interface';
+import { TokenGeneratorInterface } from '../interfaces/token-generator.interface';
 
 export class JwtTokenGenerator implements TokenGeneratorInterface {
   constructor(private readonly secret: string) {}

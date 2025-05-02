@@ -1,12 +1,12 @@
-import { PrismaService } from 'src/db/prisma/prisma.service';
+import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { UserController } from '../../interfaces/user/user.controller';
 import { Module } from '@nestjs/common';
-import { UserPrismaRepository } from '../repositories/user.prisma.repository';
+import { UserPrismaRepository } from './repository/user.prisma.repository';
 import { CreateUserUseCase } from '../../application/user/create-user.use-case';
 import { FindUserUseCase } from '../../application/user/find-user.use-case';
 import { UniqueEmailValidator } from '../../interfaces/request-validator/unique-email.validator';
-import { HashGenerator } from '../entities/authentication/hash-generator';
-import { AuthModule } from './auth.module';
+import { HashGenerator } from '../authentication/entities/hash-generator';
+import { AuthModule } from '../authentication/entities/auth.module';
 
 @Module({
   controllers: [UserController],

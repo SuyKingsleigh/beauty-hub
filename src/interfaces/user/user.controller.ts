@@ -5,14 +5,16 @@ import {
   Inject,
   Get,
   Param,
-  UseGuards, UseInterceptors,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserUseCase } from '../../application/user/create-user.use-case';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { FindUserUseCase } from '../../application/user/find-user.use-case';
 import { JwtAuthGuard } from '../../application/authentication/jwt.guard';
 import { CurrentUser } from '../authentication/decorators/current-user.decorator';
-import { User } from '../../domain/entities/user/user.entity';
+import { User } from '../../domain/user/entities/user.entity';
+import { UserDto } from './dtos/user.dto';
 
 @Controller('users')
 export class UserController {
@@ -31,11 +33,6 @@ export class UserController {
   @Get()
   @UseGuards(JwtAuthGuard)
   find(@CurrentUser() user: User) {
-    return user;
-  }
-
-  @Get('/by-email/:email')
-  async findByEmail(@Param('email') email: string) {
-    return this.findUserUseCase.findByEmail(email);
+    return new UserDto(user);
   }
 }
