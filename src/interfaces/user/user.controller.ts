@@ -4,7 +4,7 @@ import { FindUserUseCase } from '../../application/user/find-user.use-case';
 import { JwtAuthGuard } from '../../application/authentication/jwt.guard';
 import { CurrentUser } from '../authentication/decorators/current-user.decorator';
 import { User } from '../../domain/user/entities/user.entity';
-import { UserDto } from './dtos/user.dto';
+import { UserDto } from './dto/user.dto';
 
 @Controller('users')
 export class UserController {

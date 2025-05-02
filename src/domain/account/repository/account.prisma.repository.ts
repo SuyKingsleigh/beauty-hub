@@ -8,7 +8,12 @@ export class AccountPrismaRepository implements AccountRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   create(account: Account): Promise<Account> {
-    throw new Error('Method not implemented.');
+    return this.prisma.account.create({
+      data: {
+        id: account.id,
+        name: account.name,
+      },
+    });
   }
 
   findById(id: string): Promise<Account> {

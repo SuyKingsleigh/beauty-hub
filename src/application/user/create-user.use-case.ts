@@ -21,7 +21,6 @@ export class CreateUserUseCase {
   ) {}
 
   async create(input: CreateUserInput, account: Account): Promise<User> {
-    const now = new Date();
     const passwordHash = await this.hashGenerator.hash(input.password);
 
     const user = new User(
@@ -30,7 +29,6 @@ export class CreateUserUseCase {
       input.email,
       passwordHash,
       account.id!,
-      now,
     );
     return await this.userRepository.create(user);
   }

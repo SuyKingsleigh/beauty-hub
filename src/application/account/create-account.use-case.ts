@@ -6,7 +6,7 @@ import { AccountRepository } from '../../domain/account/repository/account.repos
 import { Account } from '../../domain/account/entities/account.entity';
 import { User } from '../../domain/user/entities/user.entity';
 
-interface CreateAccountInput {
+export interface CreateAccountInput {
   name: string;
 }
 
@@ -33,7 +33,7 @@ export class CreateAccountUseCase {
   private createAccount(
     createAccountInput: CreateAccountInput,
   ): Promise<Account> {
-    const account = new Account(null, createAccountInput.name, new Date());
+    const account = new Account(undefined, createAccountInput.name);
     return this.repository.create(account);
   }
 
