@@ -1,8 +1,9 @@
 import { UserRepository } from 'src/domain/user/repository/user.repository.interface';
 import { User } from '../../domain/user/entities/user.entity';
 import { HashGenerator } from '../../domain/authentication/entities/hash-generator';
+import { Account } from '../../domain/account/entities/account.entity';
 
-interface CreateUserInput {
+export interface CreateUserInput {
   name: string;
   email: string;
   password: string;
@@ -19,7 +20,7 @@ export class CreateUserUseCase {
     private readonly hashGenerator: HashGenerator,
   ) {}
 
-  async execute(input: CreateUserInput): Promise<User> {
+  async create(input: CreateUserInput, account: Account): Promise<User> {
     const now = new Date();
     const passwordHash = await this.hashGenerator.hash(input.password);
 
@@ -28,6 +29,7 @@ export class CreateUserUseCase {
       input.name,
       input.email,
       passwordHash,
+      account.id!,
       now,
     );
     return await this.userRepository.create(user);

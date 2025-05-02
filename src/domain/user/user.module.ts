@@ -6,30 +6,33 @@ import { CreateUserUseCase } from '../../application/user/create-user.use-case';
 import { FindUserUseCase } from '../../application/user/find-user.use-case';
 import { UniqueEmailValidator } from '../../interfaces/request-validator/unique-email.validator';
 import { HashGenerator } from '../authentication/entities/hash-generator';
-import { AuthModule } from '../authentication/entities/auth.module';
+import { AuthModule } from '../authentication/auth.module';
+
+export const USER_REPOSITORY = 'UserRepository';
 
 @Module({
   controllers: [UserController],
   imports: [AuthModule],
   providers: [
     PrismaService,
+    UniqueEmailValidator,
+
     {
-      provide: 'UserRepository',
+      provide: USER_REPOSITORY,
       useClass: UserPrismaRepository,
     },
     {
       provide: CreateUserUseCase,
       useFactory: (repo) => new CreateUserUseCase(repo, new HashGenerator()),
-      inject: ['UserRepository'],
+      inject: [USER_REPOSITORY],
     },
     {
       provide: FindUserUseCase,
       useFactory: (repo) => new FindUserUseCase(repo),
-      inject: ['UserRepository'],
+      inject: [USER_REPOSITORY],
     },
-    UniqueEmailValidator,
   ],
   // Essa dependencia é usada no AuthModule
-  exports: ['UserRepository', FindUserUseCase],
+  exports: [USER_REPOSITORY, FindUserUseCase, CreateUserUseCase],
 })
 export class UserModule {}
