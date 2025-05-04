@@ -9,6 +9,10 @@ import {
 import { Observable } from 'rxjs';
 import { FindUserUseCase } from '../../application/user/find-user.use-case';
 
+/**
+ * Intercepta um request antes de ser processado
+ * Obtém o usuário através do retorno do JWT
+ */
 @Injectable()
 export class CurrentUserInterceptor implements NestInterceptor {
   constructor(

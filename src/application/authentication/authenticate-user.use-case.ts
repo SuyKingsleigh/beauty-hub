@@ -10,7 +10,7 @@ export interface AuthInput {
 export class AuthenticateUserUseCase {
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly hasher: HashComparer,
+    private readonly hashComparer: HashComparer,
     private readonly jwt: JwtTokenGenerator,
   ) {}
 
@@ -18,7 +18,11 @@ export class AuthenticateUserUseCase {
     const user = await this.userRepository.findByEmail(input.email);
     if (!user) throw new Error('Invalid credentials');
 
-    const valid = await this.hasher.compare(input.password, user.passwordHash);
+    const valid = await this.hashComparer.compare(
+      input.password,
+      user.passwordHash,
+    );
+
     if (!valid) throw new Error('Invalid credentials');
 
     const token = await this.jwt.generate({
