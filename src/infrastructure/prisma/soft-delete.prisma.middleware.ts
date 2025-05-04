@@ -1,29 +1,22 @@
 import { Prisma } from 'generated/prisma';
 
-/**
- * Cria um filtro onde o deletedAt deve ser diferente de nulo para todas as chamadas no banco de dados
- */
+const FIND = ['findUnique', 'findFirst', 'findMany'];
+const TABLES = ['Establishment', 'Account', 'User'];
+
 export function softDeleteMiddleware(): Prisma.Middleware {
   return async (params, next) => {
-    // todos os finds para as tabelas
-    if (
-      ['findUnique', 'findFirst', 'findMany'].includes(params.action) &&
-      params.model &&
-      ['Establishment', 'Account', 'User'].includes(params.model) // 👈 Models you want to filter
-    ) {
-      // caso nao tenha nenhum parametro cria manualmente
-      if (!params.args) {
-        params.args = {};
-      }
+    const isReadAction = FIND.includes(params.action);
+    const isSoftDeletableModel = TABLES.includes(params.model ?? '');
 
-      // caso nao haja where adiciona um where vazio
-      if (!params.args.where) {
-        params.args.where = {};
-      }
+    if (isReadAction && isSoftDeletableModel) {
+      const originalWhere = params.args?.where ?? {};
+      const hasExplicitDeletedAt =
+        JSON.stringify(originalWhere).includes('"deletedAt"');
 
-      // Injeta apenas caso nao tenha sido explicitamente incluido
-      if (!params.args.where.deletedAt) {
-        params.args.where.deletedAt = null;
+      if (!hasExplicitDeletedAt) {
+        params.args.where = {
+          AND: [originalWhere, { deletedAt: null }],
+        };
       }
     }
 

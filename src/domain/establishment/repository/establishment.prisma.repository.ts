@@ -60,4 +60,26 @@ export class EstablishmentPrismaRepository implements EstablishmentRepository {
 
     return EstablishmentMapper.fromPrisma(fromPrisma);
   }
+
+  async delete(id: string): Promise<Establishment> {
+    const deleted = await this.prismaService.establishment.update({
+      data: {
+        deletedAt: new Date(),
+      },
+      where: {
+        id,
+      },
+    });
+    return EstablishmentMapper.fromPrisma(deleted);
+  }
+
+  async findById(id: string): Promise<Establishment | null> {
+    const found = await this.prismaService.establishment.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    return found ? EstablishmentMapper.fromPrisma(found) : null;
+  }
 }

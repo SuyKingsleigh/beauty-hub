@@ -7,4 +7,8 @@ export interface EstablishmentRepository {
     id: string,
     partial: Partial<Establishment>,
   ): Promise<Establishment>;
+
+  delete(id: string): Promise<Establishment>;
+
+  findById(id: string): Promise<Establishment | null>;
 }
