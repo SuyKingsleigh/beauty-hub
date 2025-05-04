@@ -12,10 +12,11 @@ export class Establishment {
     public state: string,
     public country: string,
     public zipCode: string,
-    public readonly account: Account,
-    public locationlinks?: LocationLinks | undefined | null,
+    public accountId: string,
+    public locationLinks?: LocationLinks | undefined,
     public readonly createdAt?: Date | null,
     public readonly updatedAt?: Date | null,
     public readonly deletedAt?: Date | null,
+    public readonly account?: Account,
   ) {}
 }
