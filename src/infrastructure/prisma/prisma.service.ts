@@ -12,7 +12,7 @@ export class PrismaService
   }
 
   async onModuleInit() {
-    this.$use(softDeleteMiddleware());
+    this.$use(softDeleteMiddleware(this));
     await this.$connect();
   }
 }
