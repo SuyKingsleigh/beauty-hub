@@ -136,9 +136,31 @@ exports.Prisma.AccountScalarFieldEnum = {
   deletedAt: 'deletedAt'
 };
 
+exports.Prisma.EstablishmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  number: 'number',
+  street: 'street',
+  neighbourhood: 'neighbourhood',
+  city: 'city',
+  state: 'state',
+  country: 'country',
+  zipCode: 'zipCode',
+  locationLinks: 'locationLinks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  accountId: 'accountId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -151,10 +173,17 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Account: 'Account'
+  Account: 'Account',
+  Establishment: 'Establishment'
 };
 
 /**

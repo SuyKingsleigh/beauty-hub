@@ -38,5 +38,28 @@ model Account {
   deletedAt DateTime?
 
   // Relations
-  users User[]
+  users         User[]
+  Establishment Establishment[]
+}
+
+model Establishment {
+  id   String @id @default(uuid())
+  name String
+
+  number        String
+  street        String
+  neighbourhood String
+  city          String
+  state         String
+  country       String
+  zipCode       String
+
+  locationLinks Json?
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id])
 }

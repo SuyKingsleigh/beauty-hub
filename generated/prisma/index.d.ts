@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
+/**
+ * Model Establishment
+ * 
+ */
+export type Establishment = $Result.DefaultSelection<Prisma.$EstablishmentPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -168,6 +173,16 @@ export class PrismaClient<
     * ```
     */
   get account(): Prisma.AccountDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.establishment`: Exposes CRUD operations for the **Establishment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Establishments
+    * const establishments = await prisma.establishment.findMany()
+    * ```
+    */
+  get establishment(): Prisma.EstablishmentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -609,7 +624,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Account: 'Account'
+    Account: 'Account',
+    Establishment: 'Establishment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -628,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account"
+      modelProps: "user" | "account" | "establishment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -780,6 +796,80 @@ export namespace Prisma {
           }
         }
       }
+      Establishment: {
+        payload: Prisma.$EstablishmentPayload<ExtArgs>
+        fields: Prisma.EstablishmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EstablishmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EstablishmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+          }
+          findFirst: {
+            args: Prisma.EstablishmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EstablishmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+          }
+          findMany: {
+            args: Prisma.EstablishmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>[]
+          }
+          create: {
+            args: Prisma.EstablishmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+          }
+          createMany: {
+            args: Prisma.EstablishmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EstablishmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>[]
+          }
+          delete: {
+            args: Prisma.EstablishmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+          }
+          update: {
+            args: Prisma.EstablishmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.EstablishmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EstablishmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EstablishmentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>[]
+          }
+          upsert: {
+            args: Prisma.EstablishmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentPayload>
+          }
+          aggregate: {
+            args: Prisma.EstablishmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEstablishment>
+          }
+          groupBy: {
+            args: Prisma.EstablishmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EstablishmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EstablishmentCountArgs<ExtArgs>
+            result: $Utils.Optional<EstablishmentCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -866,6 +956,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     account?: AccountOmit
+    establishment?: EstablishmentOmit
   }
 
   /* Types for Logging */
@@ -961,10 +1052,12 @@ export namespace Prisma {
 
   export type AccountCountOutputType = {
     users: number
+    Establishment: number
   }
 
   export type AccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | AccountCountOutputTypeCountUsersArgs
+    Establishment?: boolean | AccountCountOutputTypeCountEstablishmentArgs
   }
 
   // Custom InputTypes
@@ -983,6 +1076,13 @@ export namespace Prisma {
    */
   export type AccountCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountEstablishmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EstablishmentWhereInput
   }
 
 
@@ -2252,6 +2352,7 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     users?: boolean | Account$usersArgs<ExtArgs>
+    Establishment?: boolean | Account$EstablishmentArgs<ExtArgs>
     _count?: boolean | AccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -2282,6 +2383,7 @@ export namespace Prisma {
   export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Account$usersArgs<ExtArgs>
+    Establishment?: boolean | Account$EstablishmentArgs<ExtArgs>
     _count?: boolean | AccountCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2291,6 +2393,7 @@ export namespace Prisma {
     name: "Account"
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
+      Establishment: Prisma.$EstablishmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2693,6 +2796,7 @@ export namespace Prisma {
   export interface Prisma__AccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Account$usersArgs<ExtArgs> = {}>(args?: Subset<T, Account$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Establishment<T extends Account$EstablishmentArgs<ExtArgs> = {}>(args?: Subset<T, Account$EstablishmentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3139,6 +3243,30 @@ export namespace Prisma {
   }
 
   /**
+   * Account.Establishment
+   */
+  export type Account$EstablishmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    where?: EstablishmentWhereInput
+    orderBy?: EstablishmentOrderByWithRelationInput | EstablishmentOrderByWithRelationInput[]
+    cursor?: EstablishmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EstablishmentScalarFieldEnum | EstablishmentScalarFieldEnum[]
+  }
+
+  /**
    * Account without action
    */
   export type AccountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3154,6 +3282,1177 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Establishment
+   */
+
+  export type AggregateEstablishment = {
+    _count: EstablishmentCountAggregateOutputType | null
+    _min: EstablishmentMinAggregateOutputType | null
+    _max: EstablishmentMaxAggregateOutputType | null
+  }
+
+  export type EstablishmentMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    number: string | null
+    street: string | null
+    neighbourhood: string | null
+    city: string | null
+    state: string | null
+    country: string | null
+    zipCode: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    accountId: string | null
+  }
+
+  export type EstablishmentMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    number: string | null
+    street: string | null
+    neighbourhood: string | null
+    city: string | null
+    state: string | null
+    country: string | null
+    zipCode: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    accountId: string | null
+  }
+
+  export type EstablishmentCountAggregateOutputType = {
+    id: number
+    name: number
+    number: number
+    street: number
+    neighbourhood: number
+    city: number
+    state: number
+    country: number
+    zipCode: number
+    locationLinks: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    accountId: number
+    _all: number
+  }
+
+
+  export type EstablishmentMinAggregateInputType = {
+    id?: true
+    name?: true
+    number?: true
+    street?: true
+    neighbourhood?: true
+    city?: true
+    state?: true
+    country?: true
+    zipCode?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    accountId?: true
+  }
+
+  export type EstablishmentMaxAggregateInputType = {
+    id?: true
+    name?: true
+    number?: true
+    street?: true
+    neighbourhood?: true
+    city?: true
+    state?: true
+    country?: true
+    zipCode?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    accountId?: true
+  }
+
+  export type EstablishmentCountAggregateInputType = {
+    id?: true
+    name?: true
+    number?: true
+    street?: true
+    neighbourhood?: true
+    city?: true
+    state?: true
+    country?: true
+    zipCode?: true
+    locationLinks?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    accountId?: true
+    _all?: true
+  }
+
+  export type EstablishmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Establishment to aggregate.
+     */
+    where?: EstablishmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Establishments to fetch.
+     */
+    orderBy?: EstablishmentOrderByWithRelationInput | EstablishmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EstablishmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Establishments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Establishments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Establishments
+    **/
+    _count?: true | EstablishmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EstablishmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EstablishmentMaxAggregateInputType
+  }
+
+  export type GetEstablishmentAggregateType<T extends EstablishmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateEstablishment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEstablishment[P]>
+      : GetScalarType<T[P], AggregateEstablishment[P]>
+  }
+
+
+
+
+  export type EstablishmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EstablishmentWhereInput
+    orderBy?: EstablishmentOrderByWithAggregationInput | EstablishmentOrderByWithAggregationInput[]
+    by: EstablishmentScalarFieldEnum[] | EstablishmentScalarFieldEnum
+    having?: EstablishmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EstablishmentCountAggregateInputType | true
+    _min?: EstablishmentMinAggregateInputType
+    _max?: EstablishmentMaxAggregateInputType
+  }
+
+  export type EstablishmentGroupByOutputType = {
+    id: string
+    name: string
+    number: string
+    street: string
+    neighbourhood: string
+    city: string
+    state: string
+    country: string
+    zipCode: string
+    locationLinks: JsonValue | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    accountId: string
+    _count: EstablishmentCountAggregateOutputType | null
+    _min: EstablishmentMinAggregateOutputType | null
+    _max: EstablishmentMaxAggregateOutputType | null
+  }
+
+  type GetEstablishmentGroupByPayload<T extends EstablishmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EstablishmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EstablishmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EstablishmentGroupByOutputType[P]>
+            : GetScalarType<T[P], EstablishmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EstablishmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    number?: boolean
+    street?: boolean
+    neighbourhood?: boolean
+    city?: boolean
+    state?: boolean
+    country?: boolean
+    zipCode?: boolean
+    locationLinks?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    accountId?: boolean
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["establishment"]>
+
+  export type EstablishmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    number?: boolean
+    street?: boolean
+    neighbourhood?: boolean
+    city?: boolean
+    state?: boolean
+    country?: boolean
+    zipCode?: boolean
+    locationLinks?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    accountId?: boolean
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["establishment"]>
+
+  export type EstablishmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    number?: boolean
+    street?: boolean
+    neighbourhood?: boolean
+    city?: boolean
+    state?: boolean
+    country?: boolean
+    zipCode?: boolean
+    locationLinks?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    accountId?: boolean
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["establishment"]>
+
+  export type EstablishmentSelectScalar = {
+    id?: boolean
+    name?: boolean
+    number?: boolean
+    street?: boolean
+    neighbourhood?: boolean
+    city?: boolean
+    state?: boolean
+    country?: boolean
+    zipCode?: boolean
+    locationLinks?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    accountId?: boolean
+  }
+
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "number" | "street" | "neighbourhood" | "city" | "state" | "country" | "zipCode" | "locationLinks" | "createdAt" | "updatedAt" | "deletedAt" | "accountId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+  export type EstablishmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+  export type EstablishmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+
+  export type $EstablishmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Establishment"
+    objects: {
+      account: Prisma.$AccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      number: string
+      street: string
+      neighbourhood: string
+      city: string
+      state: string
+      country: string
+      zipCode: string
+      locationLinks: Prisma.JsonValue | null
+      createdAt: Date | null
+      updatedAt: Date | null
+      deletedAt: Date | null
+      accountId: string
+    }, ExtArgs["result"]["establishment"]>
+    composites: {}
+  }
+
+  type EstablishmentGetPayload<S extends boolean | null | undefined | EstablishmentDefaultArgs> = $Result.GetResult<Prisma.$EstablishmentPayload, S>
+
+  type EstablishmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EstablishmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EstablishmentCountAggregateInputType | true
+    }
+
+  export interface EstablishmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Establishment'], meta: { name: 'Establishment' } }
+    /**
+     * Find zero or one Establishment that matches the filter.
+     * @param {EstablishmentFindUniqueArgs} args - Arguments to find a Establishment
+     * @example
+     * // Get one Establishment
+     * const establishment = await prisma.establishment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EstablishmentFindUniqueArgs>(args: SelectSubset<T, EstablishmentFindUniqueArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Establishment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EstablishmentFindUniqueOrThrowArgs} args - Arguments to find a Establishment
+     * @example
+     * // Get one Establishment
+     * const establishment = await prisma.establishment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EstablishmentFindUniqueOrThrowArgs>(args: SelectSubset<T, EstablishmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Establishment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentFindFirstArgs} args - Arguments to find a Establishment
+     * @example
+     * // Get one Establishment
+     * const establishment = await prisma.establishment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EstablishmentFindFirstArgs>(args?: SelectSubset<T, EstablishmentFindFirstArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Establishment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentFindFirstOrThrowArgs} args - Arguments to find a Establishment
+     * @example
+     * // Get one Establishment
+     * const establishment = await prisma.establishment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EstablishmentFindFirstOrThrowArgs>(args?: SelectSubset<T, EstablishmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Establishments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Establishments
+     * const establishments = await prisma.establishment.findMany()
+     * 
+     * // Get first 10 Establishments
+     * const establishments = await prisma.establishment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const establishmentWithIdOnly = await prisma.establishment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EstablishmentFindManyArgs>(args?: SelectSubset<T, EstablishmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Establishment.
+     * @param {EstablishmentCreateArgs} args - Arguments to create a Establishment.
+     * @example
+     * // Create one Establishment
+     * const Establishment = await prisma.establishment.create({
+     *   data: {
+     *     // ... data to create a Establishment
+     *   }
+     * })
+     * 
+     */
+    create<T extends EstablishmentCreateArgs>(args: SelectSubset<T, EstablishmentCreateArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Establishments.
+     * @param {EstablishmentCreateManyArgs} args - Arguments to create many Establishments.
+     * @example
+     * // Create many Establishments
+     * const establishment = await prisma.establishment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EstablishmentCreateManyArgs>(args?: SelectSubset<T, EstablishmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Establishments and returns the data saved in the database.
+     * @param {EstablishmentCreateManyAndReturnArgs} args - Arguments to create many Establishments.
+     * @example
+     * // Create many Establishments
+     * const establishment = await prisma.establishment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Establishments and only return the `id`
+     * const establishmentWithIdOnly = await prisma.establishment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EstablishmentCreateManyAndReturnArgs>(args?: SelectSubset<T, EstablishmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Establishment.
+     * @param {EstablishmentDeleteArgs} args - Arguments to delete one Establishment.
+     * @example
+     * // Delete one Establishment
+     * const Establishment = await prisma.establishment.delete({
+     *   where: {
+     *     // ... filter to delete one Establishment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EstablishmentDeleteArgs>(args: SelectSubset<T, EstablishmentDeleteArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Establishment.
+     * @param {EstablishmentUpdateArgs} args - Arguments to update one Establishment.
+     * @example
+     * // Update one Establishment
+     * const establishment = await prisma.establishment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EstablishmentUpdateArgs>(args: SelectSubset<T, EstablishmentUpdateArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Establishments.
+     * @param {EstablishmentDeleteManyArgs} args - Arguments to filter Establishments to delete.
+     * @example
+     * // Delete a few Establishments
+     * const { count } = await prisma.establishment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EstablishmentDeleteManyArgs>(args?: SelectSubset<T, EstablishmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Establishments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Establishments
+     * const establishment = await prisma.establishment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EstablishmentUpdateManyArgs>(args: SelectSubset<T, EstablishmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Establishments and returns the data updated in the database.
+     * @param {EstablishmentUpdateManyAndReturnArgs} args - Arguments to update many Establishments.
+     * @example
+     * // Update many Establishments
+     * const establishment = await prisma.establishment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Establishments and only return the `id`
+     * const establishmentWithIdOnly = await prisma.establishment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EstablishmentUpdateManyAndReturnArgs>(args: SelectSubset<T, EstablishmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Establishment.
+     * @param {EstablishmentUpsertArgs} args - Arguments to update or create a Establishment.
+     * @example
+     * // Update or create a Establishment
+     * const establishment = await prisma.establishment.upsert({
+     *   create: {
+     *     // ... data to create a Establishment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Establishment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EstablishmentUpsertArgs>(args: SelectSubset<T, EstablishmentUpsertArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Establishments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentCountArgs} args - Arguments to filter Establishments to count.
+     * @example
+     * // Count the number of Establishments
+     * const count = await prisma.establishment.count({
+     *   where: {
+     *     // ... the filter for the Establishments we want to count
+     *   }
+     * })
+    **/
+    count<T extends EstablishmentCountArgs>(
+      args?: Subset<T, EstablishmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EstablishmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Establishment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EstablishmentAggregateArgs>(args: Subset<T, EstablishmentAggregateArgs>): Prisma.PrismaPromise<GetEstablishmentAggregateType<T>>
+
+    /**
+     * Group by Establishment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EstablishmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EstablishmentGroupByArgs['orderBy'] }
+        : { orderBy?: EstablishmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EstablishmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEstablishmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Establishment model
+   */
+  readonly fields: EstablishmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Establishment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EstablishmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Establishment model
+   */
+  interface EstablishmentFieldRefs {
+    readonly id: FieldRef<"Establishment", 'String'>
+    readonly name: FieldRef<"Establishment", 'String'>
+    readonly number: FieldRef<"Establishment", 'String'>
+    readonly street: FieldRef<"Establishment", 'String'>
+    readonly neighbourhood: FieldRef<"Establishment", 'String'>
+    readonly city: FieldRef<"Establishment", 'String'>
+    readonly state: FieldRef<"Establishment", 'String'>
+    readonly country: FieldRef<"Establishment", 'String'>
+    readonly zipCode: FieldRef<"Establishment", 'String'>
+    readonly locationLinks: FieldRef<"Establishment", 'Json'>
+    readonly createdAt: FieldRef<"Establishment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Establishment", 'DateTime'>
+    readonly deletedAt: FieldRef<"Establishment", 'DateTime'>
+    readonly accountId: FieldRef<"Establishment", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Establishment findUnique
+   */
+  export type EstablishmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Establishment to fetch.
+     */
+    where: EstablishmentWhereUniqueInput
+  }
+
+  /**
+   * Establishment findUniqueOrThrow
+   */
+  export type EstablishmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Establishment to fetch.
+     */
+    where: EstablishmentWhereUniqueInput
+  }
+
+  /**
+   * Establishment findFirst
+   */
+  export type EstablishmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Establishment to fetch.
+     */
+    where?: EstablishmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Establishments to fetch.
+     */
+    orderBy?: EstablishmentOrderByWithRelationInput | EstablishmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Establishments.
+     */
+    cursor?: EstablishmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Establishments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Establishments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Establishments.
+     */
+    distinct?: EstablishmentScalarFieldEnum | EstablishmentScalarFieldEnum[]
+  }
+
+  /**
+   * Establishment findFirstOrThrow
+   */
+  export type EstablishmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Establishment to fetch.
+     */
+    where?: EstablishmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Establishments to fetch.
+     */
+    orderBy?: EstablishmentOrderByWithRelationInput | EstablishmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Establishments.
+     */
+    cursor?: EstablishmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Establishments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Establishments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Establishments.
+     */
+    distinct?: EstablishmentScalarFieldEnum | EstablishmentScalarFieldEnum[]
+  }
+
+  /**
+   * Establishment findMany
+   */
+  export type EstablishmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Establishments to fetch.
+     */
+    where?: EstablishmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Establishments to fetch.
+     */
+    orderBy?: EstablishmentOrderByWithRelationInput | EstablishmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Establishments.
+     */
+    cursor?: EstablishmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Establishments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Establishments.
+     */
+    skip?: number
+    distinct?: EstablishmentScalarFieldEnum | EstablishmentScalarFieldEnum[]
+  }
+
+  /**
+   * Establishment create
+   */
+  export type EstablishmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Establishment.
+     */
+    data: XOR<EstablishmentCreateInput, EstablishmentUncheckedCreateInput>
+  }
+
+  /**
+   * Establishment createMany
+   */
+  export type EstablishmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Establishments.
+     */
+    data: EstablishmentCreateManyInput | EstablishmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Establishment createManyAndReturn
+   */
+  export type EstablishmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Establishments.
+     */
+    data: EstablishmentCreateManyInput | EstablishmentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Establishment update
+   */
+  export type EstablishmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Establishment.
+     */
+    data: XOR<EstablishmentUpdateInput, EstablishmentUncheckedUpdateInput>
+    /**
+     * Choose, which Establishment to update.
+     */
+    where: EstablishmentWhereUniqueInput
+  }
+
+  /**
+   * Establishment updateMany
+   */
+  export type EstablishmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Establishments.
+     */
+    data: XOR<EstablishmentUpdateManyMutationInput, EstablishmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Establishments to update
+     */
+    where?: EstablishmentWhereInput
+    /**
+     * Limit how many Establishments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Establishment updateManyAndReturn
+   */
+  export type EstablishmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * The data used to update Establishments.
+     */
+    data: XOR<EstablishmentUpdateManyMutationInput, EstablishmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Establishments to update
+     */
+    where?: EstablishmentWhereInput
+    /**
+     * Limit how many Establishments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Establishment upsert
+   */
+  export type EstablishmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Establishment to update in case it exists.
+     */
+    where: EstablishmentWhereUniqueInput
+    /**
+     * In case the Establishment found by the `where` argument doesn't exist, create a new Establishment with this data.
+     */
+    create: XOR<EstablishmentCreateInput, EstablishmentUncheckedCreateInput>
+    /**
+     * In case the Establishment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EstablishmentUpdateInput, EstablishmentUncheckedUpdateInput>
+  }
+
+  /**
+   * Establishment delete
+   */
+  export type EstablishmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    /**
+     * Filter which Establishment to delete.
+     */
+    where: EstablishmentWhereUniqueInput
+  }
+
+  /**
+   * Establishment deleteMany
+   */
+  export type EstablishmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Establishments to delete
+     */
+    where?: EstablishmentWhereInput
+    /**
+     * Limit how many Establishments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Establishment without action
+   */
+  export type EstablishmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
   }
 
 
@@ -3196,12 +4495,40 @@ export namespace Prisma {
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
 
 
+  export const EstablishmentScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    number: 'number',
+    street: 'street',
+    neighbourhood: 'neighbourhood',
+    city: 'city',
+    state: 'state',
+    country: 'country',
+    zipCode: 'zipCode',
+    locationLinks: 'locationLinks',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    accountId: 'accountId'
+  };
+
+  export type EstablishmentScalarFieldEnum = (typeof EstablishmentScalarFieldEnum)[keyof typeof EstablishmentScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -3218,6 +4545,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -3250,6 +4586,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -3350,6 +4700,7 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableFilter<"Account"> | Date | string | null
     deletedAt?: DateTimeNullableFilter<"Account"> | Date | string | null
     users?: UserListRelationFilter
+    Establishment?: EstablishmentListRelationFilter
   }
 
   export type AccountOrderByWithRelationInput = {
@@ -3359,6 +4710,7 @@ export namespace Prisma {
     updatedAt?: SortOrderInput | SortOrder
     deletedAt?: SortOrderInput | SortOrder
     users?: UserOrderByRelationAggregateInput
+    Establishment?: EstablishmentOrderByRelationAggregateInput
   }
 
   export type AccountWhereUniqueInput = Prisma.AtLeast<{
@@ -3371,6 +4723,7 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableFilter<"Account"> | Date | string | null
     deletedAt?: DateTimeNullableFilter<"Account"> | Date | string | null
     users?: UserListRelationFilter
+    Establishment?: EstablishmentListRelationFilter
   }, "id">
 
   export type AccountOrderByWithAggregationInput = {
@@ -3393,6 +4746,106 @@ export namespace Prisma {
     createdAt?: DateTimeNullableWithAggregatesFilter<"Account"> | Date | string | null
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Account"> | Date | string | null
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Account"> | Date | string | null
+  }
+
+  export type EstablishmentWhereInput = {
+    AND?: EstablishmentWhereInput | EstablishmentWhereInput[]
+    OR?: EstablishmentWhereInput[]
+    NOT?: EstablishmentWhereInput | EstablishmentWhereInput[]
+    id?: StringFilter<"Establishment"> | string
+    name?: StringFilter<"Establishment"> | string
+    number?: StringFilter<"Establishment"> | string
+    street?: StringFilter<"Establishment"> | string
+    neighbourhood?: StringFilter<"Establishment"> | string
+    city?: StringFilter<"Establishment"> | string
+    state?: StringFilter<"Establishment"> | string
+    country?: StringFilter<"Establishment"> | string
+    zipCode?: StringFilter<"Establishment"> | string
+    locationLinks?: JsonNullableFilter<"Establishment">
+    createdAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    deletedAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    accountId?: StringFilter<"Establishment"> | string
+    account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+  }
+
+  export type EstablishmentOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    number?: SortOrder
+    street?: SortOrder
+    neighbourhood?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    zipCode?: SortOrder
+    locationLinks?: SortOrderInput | SortOrder
+    createdAt?: SortOrderInput | SortOrder
+    updatedAt?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    accountId?: SortOrder
+    account?: AccountOrderByWithRelationInput
+  }
+
+  export type EstablishmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EstablishmentWhereInput | EstablishmentWhereInput[]
+    OR?: EstablishmentWhereInput[]
+    NOT?: EstablishmentWhereInput | EstablishmentWhereInput[]
+    name?: StringFilter<"Establishment"> | string
+    number?: StringFilter<"Establishment"> | string
+    street?: StringFilter<"Establishment"> | string
+    neighbourhood?: StringFilter<"Establishment"> | string
+    city?: StringFilter<"Establishment"> | string
+    state?: StringFilter<"Establishment"> | string
+    country?: StringFilter<"Establishment"> | string
+    zipCode?: StringFilter<"Establishment"> | string
+    locationLinks?: JsonNullableFilter<"Establishment">
+    createdAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    deletedAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    accountId?: StringFilter<"Establishment"> | string
+    account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+  }, "id">
+
+  export type EstablishmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    number?: SortOrder
+    street?: SortOrder
+    neighbourhood?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    zipCode?: SortOrder
+    locationLinks?: SortOrderInput | SortOrder
+    createdAt?: SortOrderInput | SortOrder
+    updatedAt?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    accountId?: SortOrder
+    _count?: EstablishmentCountOrderByAggregateInput
+    _max?: EstablishmentMaxOrderByAggregateInput
+    _min?: EstablishmentMinOrderByAggregateInput
+  }
+
+  export type EstablishmentScalarWhereWithAggregatesInput = {
+    AND?: EstablishmentScalarWhereWithAggregatesInput | EstablishmentScalarWhereWithAggregatesInput[]
+    OR?: EstablishmentScalarWhereWithAggregatesInput[]
+    NOT?: EstablishmentScalarWhereWithAggregatesInput | EstablishmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Establishment"> | string
+    name?: StringWithAggregatesFilter<"Establishment"> | string
+    number?: StringWithAggregatesFilter<"Establishment"> | string
+    street?: StringWithAggregatesFilter<"Establishment"> | string
+    neighbourhood?: StringWithAggregatesFilter<"Establishment"> | string
+    city?: StringWithAggregatesFilter<"Establishment"> | string
+    state?: StringWithAggregatesFilter<"Establishment"> | string
+    country?: StringWithAggregatesFilter<"Establishment"> | string
+    zipCode?: StringWithAggregatesFilter<"Establishment"> | string
+    locationLinks?: JsonNullableWithAggregatesFilter<"Establishment">
+    createdAt?: DateTimeNullableWithAggregatesFilter<"Establishment"> | Date | string | null
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Establishment"> | Date | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Establishment"> | Date | string | null
+    accountId?: StringWithAggregatesFilter<"Establishment"> | string
   }
 
   export type UserCreateInput = {
@@ -3478,6 +4931,7 @@ export namespace Prisma {
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
     users?: UserCreateNestedManyWithoutAccountInput
+    Establishment?: EstablishmentCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateInput = {
@@ -3487,6 +4941,7 @@ export namespace Prisma {
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
     users?: UserUncheckedCreateNestedManyWithoutAccountInput
+    Establishment?: EstablishmentUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUpdateInput = {
@@ -3496,6 +4951,7 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     users?: UserUpdateManyWithoutAccountNestedInput
+    Establishment?: EstablishmentUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateInput = {
@@ -3505,6 +4961,7 @@ export namespace Prisma {
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     users?: UserUncheckedUpdateManyWithoutAccountNestedInput
+    Establishment?: EstablishmentUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountCreateManyInput = {
@@ -3529,6 +4986,124 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EstablishmentCreateInput = {
+    id?: string
+    name: string
+    number: string
+    street: string
+    neighbourhood: string
+    city: string
+    state: string
+    country: string
+    zipCode: string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    deletedAt?: Date | string | null
+    account: AccountCreateNestedOneWithoutEstablishmentInput
+  }
+
+  export type EstablishmentUncheckedCreateInput = {
+    id?: string
+    name: string
+    number: string
+    street: string
+    neighbourhood: string
+    city: string
+    state: string
+    country: string
+    zipCode: string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    deletedAt?: Date | string | null
+    accountId: string
+  }
+
+  export type EstablishmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    street?: StringFieldUpdateOperationsInput | string
+    neighbourhood?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    account?: AccountUpdateOneRequiredWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    street?: StringFieldUpdateOperationsInput | string
+    neighbourhood?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accountId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EstablishmentCreateManyInput = {
+    id?: string
+    name: string
+    number: string
+    street: string
+    neighbourhood: string
+    city: string
+    state: string
+    country: string
+    zipCode: string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    deletedAt?: Date | string | null
+    accountId: string
+  }
+
+  export type EstablishmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    street?: StringFieldUpdateOperationsInput | string
+    neighbourhood?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EstablishmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    street?: StringFieldUpdateOperationsInput | string
+    neighbourhood?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accountId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3638,7 +5213,17 @@ export namespace Prisma {
     none?: UserWhereInput
   }
 
+  export type EstablishmentListRelationFilter = {
+    every?: EstablishmentWhereInput
+    some?: EstablishmentWhereInput
+    none?: EstablishmentWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EstablishmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -3664,6 +5249,104 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EstablishmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    number?: SortOrder
+    street?: SortOrder
+    neighbourhood?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    zipCode?: SortOrder
+    locationLinks?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    accountId?: SortOrder
+  }
+
+  export type EstablishmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    number?: SortOrder
+    street?: SortOrder
+    neighbourhood?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    zipCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    accountId?: SortOrder
+  }
+
+  export type EstablishmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    number?: SortOrder
+    street?: SortOrder
+    neighbourhood?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    zipCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    accountId?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type AccountCreateNestedOneWithoutUsersInput = {
@@ -3695,11 +5378,25 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type EstablishmentCreateNestedManyWithoutAccountInput = {
+    create?: XOR<EstablishmentCreateWithoutAccountInput, EstablishmentUncheckedCreateWithoutAccountInput> | EstablishmentCreateWithoutAccountInput[] | EstablishmentUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutAccountInput | EstablishmentCreateOrConnectWithoutAccountInput[]
+    createMany?: EstablishmentCreateManyAccountInputEnvelope
+    connect?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutAccountInput = {
     create?: XOR<UserCreateWithoutAccountInput, UserUncheckedCreateWithoutAccountInput> | UserCreateWithoutAccountInput[] | UserUncheckedCreateWithoutAccountInput[]
     connectOrCreate?: UserCreateOrConnectWithoutAccountInput | UserCreateOrConnectWithoutAccountInput[]
     createMany?: UserCreateManyAccountInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type EstablishmentUncheckedCreateNestedManyWithoutAccountInput = {
+    create?: XOR<EstablishmentCreateWithoutAccountInput, EstablishmentUncheckedCreateWithoutAccountInput> | EstablishmentCreateWithoutAccountInput[] | EstablishmentUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutAccountInput | EstablishmentCreateOrConnectWithoutAccountInput[]
+    createMany?: EstablishmentCreateManyAccountInputEnvelope
+    connect?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
   }
 
   export type UserUpdateManyWithoutAccountNestedInput = {
@@ -3716,6 +5413,20 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type EstablishmentUpdateManyWithoutAccountNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutAccountInput, EstablishmentUncheckedCreateWithoutAccountInput> | EstablishmentCreateWithoutAccountInput[] | EstablishmentUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutAccountInput | EstablishmentCreateOrConnectWithoutAccountInput[]
+    upsert?: EstablishmentUpsertWithWhereUniqueWithoutAccountInput | EstablishmentUpsertWithWhereUniqueWithoutAccountInput[]
+    createMany?: EstablishmentCreateManyAccountInputEnvelope
+    set?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+    disconnect?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+    delete?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+    connect?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+    update?: EstablishmentUpdateWithWhereUniqueWithoutAccountInput | EstablishmentUpdateWithWhereUniqueWithoutAccountInput[]
+    updateMany?: EstablishmentUpdateManyWithWhereWithoutAccountInput | EstablishmentUpdateManyWithWhereWithoutAccountInput[]
+    deleteMany?: EstablishmentScalarWhereInput | EstablishmentScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutAccountNestedInput = {
     create?: XOR<UserCreateWithoutAccountInput, UserUncheckedCreateWithoutAccountInput> | UserCreateWithoutAccountInput[] | UserUncheckedCreateWithoutAccountInput[]
     connectOrCreate?: UserCreateOrConnectWithoutAccountInput | UserCreateOrConnectWithoutAccountInput[]
@@ -3728,6 +5439,34 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutAccountInput | UserUpdateWithWhereUniqueWithoutAccountInput[]
     updateMany?: UserUpdateManyWithWhereWithoutAccountInput | UserUpdateManyWithWhereWithoutAccountInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type EstablishmentUncheckedUpdateManyWithoutAccountNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutAccountInput, EstablishmentUncheckedCreateWithoutAccountInput> | EstablishmentCreateWithoutAccountInput[] | EstablishmentUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutAccountInput | EstablishmentCreateOrConnectWithoutAccountInput[]
+    upsert?: EstablishmentUpsertWithWhereUniqueWithoutAccountInput | EstablishmentUpsertWithWhereUniqueWithoutAccountInput[]
+    createMany?: EstablishmentCreateManyAccountInputEnvelope
+    set?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+    disconnect?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+    delete?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+    connect?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
+    update?: EstablishmentUpdateWithWhereUniqueWithoutAccountInput | EstablishmentUpdateWithWhereUniqueWithoutAccountInput[]
+    updateMany?: EstablishmentUpdateManyWithWhereWithoutAccountInput | EstablishmentUpdateManyWithWhereWithoutAccountInput[]
+    deleteMany?: EstablishmentScalarWhereInput | EstablishmentScalarWhereInput[]
+  }
+
+  export type AccountCreateNestedOneWithoutEstablishmentInput = {
+    create?: XOR<AccountCreateWithoutEstablishmentInput, AccountUncheckedCreateWithoutEstablishmentInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutEstablishmentInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type AccountUpdateOneRequiredWithoutEstablishmentNestedInput = {
+    create?: XOR<AccountCreateWithoutEstablishmentInput, AccountUncheckedCreateWithoutEstablishmentInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutEstablishmentInput
+    upsert?: AccountUpsertWithoutEstablishmentInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutEstablishmentInput, AccountUpdateWithoutEstablishmentInput>, AccountUncheckedUpdateWithoutEstablishmentInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3807,6 +5546,29 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type AccountCreateWithoutUsersInput = {
     id?: string
@@ -3814,6 +5576,7 @@ export namespace Prisma {
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
+    Establishment?: EstablishmentCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateWithoutUsersInput = {
@@ -3822,6 +5585,7 @@ export namespace Prisma {
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
+    Establishment?: EstablishmentUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountCreateOrConnectWithoutUsersInput = {
@@ -3846,6 +5610,7 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Establishment?: EstablishmentUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutUsersInput = {
@@ -3854,6 +5619,7 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Establishment?: EstablishmentUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type UserCreateWithoutAccountInput = {
@@ -3883,6 +5649,48 @@ export namespace Prisma {
 
   export type UserCreateManyAccountInputEnvelope = {
     data: UserCreateManyAccountInput | UserCreateManyAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EstablishmentCreateWithoutAccountInput = {
+    id?: string
+    name: string
+    number: string
+    street: string
+    neighbourhood: string
+    city: string
+    state: string
+    country: string
+    zipCode: string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    deletedAt?: Date | string | null
+  }
+
+  export type EstablishmentUncheckedCreateWithoutAccountInput = {
+    id?: string
+    name: string
+    number: string
+    street: string
+    neighbourhood: string
+    city: string
+    state: string
+    country: string
+    zipCode: string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    deletedAt?: Date | string | null
+  }
+
+  export type EstablishmentCreateOrConnectWithoutAccountInput = {
+    where: EstablishmentWhereUniqueInput
+    create: XOR<EstablishmentCreateWithoutAccountInput, EstablishmentUncheckedCreateWithoutAccountInput>
+  }
+
+  export type EstablishmentCreateManyAccountInputEnvelope = {
+    data: EstablishmentCreateManyAccountInput | EstablishmentCreateManyAccountInput[]
     skipDuplicates?: boolean
   }
 
@@ -3916,11 +5724,115 @@ export namespace Prisma {
     accountId?: StringFilter<"User"> | string
   }
 
+  export type EstablishmentUpsertWithWhereUniqueWithoutAccountInput = {
+    where: EstablishmentWhereUniqueInput
+    update: XOR<EstablishmentUpdateWithoutAccountInput, EstablishmentUncheckedUpdateWithoutAccountInput>
+    create: XOR<EstablishmentCreateWithoutAccountInput, EstablishmentUncheckedCreateWithoutAccountInput>
+  }
+
+  export type EstablishmentUpdateWithWhereUniqueWithoutAccountInput = {
+    where: EstablishmentWhereUniqueInput
+    data: XOR<EstablishmentUpdateWithoutAccountInput, EstablishmentUncheckedUpdateWithoutAccountInput>
+  }
+
+  export type EstablishmentUpdateManyWithWhereWithoutAccountInput = {
+    where: EstablishmentScalarWhereInput
+    data: XOR<EstablishmentUpdateManyMutationInput, EstablishmentUncheckedUpdateManyWithoutAccountInput>
+  }
+
+  export type EstablishmentScalarWhereInput = {
+    AND?: EstablishmentScalarWhereInput | EstablishmentScalarWhereInput[]
+    OR?: EstablishmentScalarWhereInput[]
+    NOT?: EstablishmentScalarWhereInput | EstablishmentScalarWhereInput[]
+    id?: StringFilter<"Establishment"> | string
+    name?: StringFilter<"Establishment"> | string
+    number?: StringFilter<"Establishment"> | string
+    street?: StringFilter<"Establishment"> | string
+    neighbourhood?: StringFilter<"Establishment"> | string
+    city?: StringFilter<"Establishment"> | string
+    state?: StringFilter<"Establishment"> | string
+    country?: StringFilter<"Establishment"> | string
+    zipCode?: StringFilter<"Establishment"> | string
+    locationLinks?: JsonNullableFilter<"Establishment">
+    createdAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    deletedAt?: DateTimeNullableFilter<"Establishment"> | Date | string | null
+    accountId?: StringFilter<"Establishment"> | string
+  }
+
+  export type AccountCreateWithoutEstablishmentInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    deletedAt?: Date | string | null
+    users?: UserCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountUncheckedCreateWithoutEstablishmentInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    deletedAt?: Date | string | null
+    users?: UserUncheckedCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountCreateOrConnectWithoutEstablishmentInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutEstablishmentInput, AccountUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type AccountUpsertWithoutEstablishmentInput = {
+    update: XOR<AccountUpdateWithoutEstablishmentInput, AccountUncheckedUpdateWithoutEstablishmentInput>
+    create: XOR<AccountCreateWithoutEstablishmentInput, AccountUncheckedCreateWithoutEstablishmentInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutEstablishmentInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutEstablishmentInput, AccountUncheckedUpdateWithoutEstablishmentInput>
+  }
+
+  export type AccountUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    users?: UserUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    users?: UserUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
   export type UserCreateManyAccountInput = {
     id?: string
     name: string
     email: string
     passwordHash: string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    deletedAt?: Date | string | null
+  }
+
+  export type EstablishmentCreateManyAccountInput = {
+    id?: string
+    name: string
+    number: string
+    street: string
+    neighbourhood: string
+    city: string
+    state: string
+    country: string
+    zipCode: string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -3951,6 +5863,54 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EstablishmentUpdateWithoutAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    street?: StringFieldUpdateOperationsInput | string
+    neighbourhood?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EstablishmentUncheckedUpdateWithoutAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    street?: StringFieldUpdateOperationsInput | string
+    neighbourhood?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EstablishmentUncheckedUpdateManyWithoutAccountInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    street?: StringFieldUpdateOperationsInput | string
+    neighbourhood?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    locationLinks?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
