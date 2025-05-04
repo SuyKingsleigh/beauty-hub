@@ -1,5 +1,5 @@
 import { IsNotEmpty, ValidateNested } from 'class-validator';
-import { CreateUserDto } from '../../../user/dto/create-user.dto';
+import { CreateUserDto } from '../../user/dto/create-user.dto';
 import { Type } from 'class-transformer';
 
 class CreateAccountDto {
@@ -7,7 +7,7 @@ class CreateAccountDto {
   name: string;
 }
 
-export class CreateAccountAndFirstUserDto {
+export class CreateAccountAndFirstUserInputDto {
   @ValidateNested()
   @Type(() => CreateAccountDto)
   account: CreateAccountDto;
