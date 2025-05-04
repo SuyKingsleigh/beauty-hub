@@ -9,6 +9,34 @@ import { LocationLinksMapper } from '../mapper/location-links.mapper';
 export class EstablishmentPrismaRepository implements EstablishmentRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async updatePartial(
+    id: string,
+    partial: Partial<Establishment>,
+  ): Promise<Establishment> {
+    const locationLinks =
+      partial.locationLinks !== undefined
+        ? LocationLinksMapper.toPrisma(partial.locationLinks)
+        : undefined;
+
+    const updated = await this.prismaService.establishment.update({
+      where: { id },
+      data: {
+        name: partial.name,
+        number: partial.number,
+        street: partial.street,
+        neighbourhood: partial.neighbourhood,
+        city: partial.city,
+        state: partial.state,
+        country: partial.country,
+        zipCode: partial.zipCode,
+        accountId: partial.accountId,
+        locationLinks,
+      },
+    });
+
+    return EstablishmentMapper.fromPrisma(updated);
+  }
+
   async create(establishment: Establishment): Promise<Establishment> {
     const locationLinks = LocationLinksMapper.toPrisma(
       establishment.locationLinks,

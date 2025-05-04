@@ -1,7 +1,7 @@
 import { LocationLinks } from '../../../domain/establishment/entities/location-links.entity';
 import { Establishment } from '../../../domain/establishment/entities/establishment.entity';
 
-export class CreateEstablishmentOutputDto {
+export class EstablishmentOutputDto {
   id: string;
   name: string;
   number: string;
