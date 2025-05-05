@@ -153,6 +153,18 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   accountId: 'accountId'
 };
 
+exports.Prisma.ServiceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  description: 'description',
+  extraDetails: 'extraDetails',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  establishmentId: 'establishmentId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -183,7 +195,8 @@ exports.Prisma.JsonNullValueFilter = {
 exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
-  Establishment: 'Establishment'
+  Establishment: 'Establishment',
+  Service: 'Service'
 };
 
 /**
