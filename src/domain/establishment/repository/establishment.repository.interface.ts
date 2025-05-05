@@ -11,4 +11,6 @@ export interface EstablishmentRepository {
   delete(id: string): Promise<Establishment>;
 
   findById(id: string): Promise<Establishment | null>;
+
+  exists(id: string): Promise<boolean>;
 }
