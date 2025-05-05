@@ -25,8 +25,9 @@ export class ServicePrismaRepository implements ServiceRepository {
     return ServiceMapper.fromPrisma(updated);
   }
 
-  findById(id: string): Promise<Service | null> {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<Service | null> {
+    const found = await this.prisma.service.findFirst({ where: { id } });
+    return found ? ServiceMapper.fromPrisma(found) : null;
   }
 
   delete(id: string): Promise<Service | null> {
