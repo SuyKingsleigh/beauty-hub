@@ -209,11 +209,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://suy:suy@localhost:5432/userservice"
+        "value": null
       }
     }
   },
