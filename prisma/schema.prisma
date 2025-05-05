@@ -61,5 +61,22 @@ model Establishment {
   deletedAt DateTime?
 
   accountId String
-  account   Account @relation(fields: [accountId], references: [id])
+  account   Account   @relation(fields: [accountId], references: [id])
+  Service   Service[]
+}
+
+model Service {
+  id          String  @id @default(uuid())
+  name        String
+  price       Decimal @db.Decimal(10, 2)
+  description String
+
+  extraDetails Json?
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  establishmentId String
+  establishment   Establishment @relation(fields: [establishmentId], references: [id])
 }
