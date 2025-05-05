@@ -6,9 +6,16 @@ import { AccountModule } from './domain/account/account.module';
 import { EstablishmentModule } from './domain/establishment/establishment.module';
 import { EstablishmentController } from './interfaces/establishment/establishment.controller';
 import { CreateEstablishmentUseCase } from './application/establishment/create-establishment.use-case';
+import { ServiceModule } from './domain/service/service.module';
 
 @Module({
-  imports: [UserModule, AuthModule, AccountModule, EstablishmentModule],
+  imports: [
+    UserModule,
+    AuthModule,
+    AccountModule,
+    EstablishmentModule,
+    ServiceModule,
+  ],
   providers: [CurrentUserInterceptor],
 })
 export class AppModule {}
