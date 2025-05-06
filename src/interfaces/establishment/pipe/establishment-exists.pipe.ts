@@ -1,6 +1,10 @@
 import { PipeTransform, Injectable, NotFoundException } from '@nestjs/common';
 import { FindEstablishmentUseCase } from '../../../application/establishment/find-establishment.use-case';
 
+/**
+ * Verifica se um objeto existe, mas está deprecado (já)
+ * deve-se usar um Guard customizaado
+ */
 @Injectable()
 export class EstablishmentExistsPipe implements PipeTransform {
   constructor(private readonly finder: FindEstablishmentUseCase) {}

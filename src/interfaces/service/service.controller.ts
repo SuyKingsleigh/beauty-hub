@@ -2,6 +2,7 @@ import { CreateServiceUseCase } from '../../application/service/create-service.u
 import {
   Body,
   Controller,
+  Get,
   Param,
   Patch,
   Post,
@@ -30,6 +31,13 @@ export class ServiceController {
   @TransformToDto(ServiceOutputDto)
   create(@Body() input: ServiceInputDto) {
     return this.creator.create(ServiceMapper.toService(input));
+  }
+
+  @Get(':id')
+  @TransformToDto(ServiceOutputDto)
+  @UseGuards(ServiceBelongsToAccountGuard)
+  find(@Param('id') id: string) {
+    return this.finder.findById(id);
   }
 
   @Patch(':id')
