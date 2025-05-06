@@ -2,7 +2,7 @@
 
 import { Prisma, PrismaClient } from 'generated/prisma';
 
-const TABLES = ['Establishment', 'Account', 'User'];
+const TABLES = ['Establishment', 'Account', 'User', 'Service'];
 const ACTIONS_WITH_FILTER = ['findMany', 'findFirst'];
 const ACTIONS_WITH_UNIQUE_WHERE = ['findUnique', 'update', 'delete'];
 

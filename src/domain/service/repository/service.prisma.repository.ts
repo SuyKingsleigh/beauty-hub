@@ -8,6 +8,21 @@ import { ServiceMapper } from '../mapper/service.mapper';
 export class ServicePrismaRepository implements ServiceRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  async findAll(accountId: string): Promise<Service[]> {
+    const found = await this.prisma.service.findMany({
+      where: {
+        establishment: {
+          accountId,
+        },
+      },
+      include: {
+        establishment: true,
+      },
+    });
+
+    return found.map((s) => ServiceMapper.fromPrisma(s));
+  }
+
   async exists(id: string): Promise<boolean> {
     const found = await this.prisma.service.findFirst({
       where: { id },
@@ -48,7 +63,14 @@ export class ServicePrismaRepository implements ServiceRepository {
     return found ? ServiceMapper.fromPrisma(found) : null;
   }
 
-  delete(id: string): Promise<Service | null> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<Service> {
+    const deleted = await this.prisma.service.update({
+      data: {
+        deletedAt: new Date(),
+      },
+      where: { id },
+    });
+
+    return ServiceMapper.fromPrisma(deleted);
   }
 }

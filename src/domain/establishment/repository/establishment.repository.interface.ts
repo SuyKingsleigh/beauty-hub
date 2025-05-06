@@ -12,5 +12,7 @@ export interface EstablishmentRepository {
 
   findById(id: string): Promise<Establishment | null>;
 
+  findAll(accountId: string): Promise<Establishment[]>;
+
   exists(id: string): Promise<boolean>;
 }

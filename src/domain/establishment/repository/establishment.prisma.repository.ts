@@ -9,6 +9,18 @@ import { LocationLinksMapper } from '../mapper/location-links.mapper';
 export class EstablishmentPrismaRepository implements EstablishmentRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async findAll(accountId: string): Promise<Establishment[]> {
+    const all = await this.prismaService.establishment.findMany({
+      where: {
+        accountId,
+      },
+    });
+
+    return all.map((pEstablishment) =>
+      EstablishmentMapper.fromPrisma(pEstablishment),
+    );
+  }
+
   async exists(id: string): Promise<boolean> {
     const found = await this.prismaService.establishment.findUnique({
       where: { id },

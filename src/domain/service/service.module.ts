@@ -7,6 +7,7 @@ import { CreateServiceUseCase } from '../../application/service/create-service.u
 import { FindServiceUseCase } from '../../application/service/find-service.use-case';
 import { UpdateServiceUseCase } from '../../application/service/update-service.use-case';
 import { ServiceBelongsToAccountGuard } from '../../interfaces/service/guard/service-belongs-to-account.guard';
+import { DeleteServiceUseCase } from '../../application/service/delete-service.use-case';
 
 export const SERVICE_REPOSITORY = 'ServiceRepository';
 
@@ -34,6 +35,11 @@ export const SERVICE_REPOSITORY = 'ServiceRepository';
       useFactory: (repository) => new UpdateServiceUseCase(repository),
       inject: [SERVICE_REPOSITORY],
     },
+    {
+      provide: DeleteServiceUseCase,
+      useFactory: (repository) => new DeleteServiceUseCase(repository),
+      inject: [SERVICE_REPOSITORY],
+    },
   ],
   controllers: [ServiceController],
   exports: [
@@ -41,6 +47,7 @@ export const SERVICE_REPOSITORY = 'ServiceRepository';
     CreateServiceUseCase,
     FindServiceUseCase,
     UpdateServiceUseCase,
+    DeleteServiceUseCase,
   ],
 })
 export class ServiceModule {}

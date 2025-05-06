@@ -7,7 +7,9 @@ export interface ServiceRepository {
 
   findById(id: string): Promise<Service | null>;
 
-  delete(id: string): Promise<Service | null>;
+  delete(id: string): Promise<Service>;
 
   exists(id: string): Promise<boolean>;
+
+  findAll(accountId: string): Promise<Service[]>;
 }
