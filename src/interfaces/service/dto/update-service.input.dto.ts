@@ -22,7 +22,11 @@ export class UpdateServiceInputDto {
   /**
    * Retorna o preço convertido para número float (ex: "10,50" → 10.5)
    */
-  getPriceAsFloat(): number {
+  getPriceAsFloat(): number | undefined {
+    if (!this.price) {
+      return undefined;
+    }
+    
     return parseFloat(this.price.replace(',', '.'));
   }
 }

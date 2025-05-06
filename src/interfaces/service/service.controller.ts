@@ -36,6 +36,6 @@ export class ServiceController {
   @TransformToDto(ServiceOutputDto)
   @UseGuards(ServiceBelongsToAccountGuard)
   update(@Param('id') id: string, @Body() input: UpdateServiceInputDto) {
-    return this.updater.update(id, ServiceMapper.toService(input));
+    return this.updater.update(id, ServiceMapper.toPartialService(input));
   }
 }
