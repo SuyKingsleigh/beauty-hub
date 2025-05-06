@@ -1,7 +1,8 @@
 import { LocationLinks } from './location-links.entity';
 import { Account } from '../../account/entities/account.entity';
+import { BelongsToAccountInterface } from '../../interfaces/belongs-to-account.interface';
 
-export class Establishment {
+export class Establishment implements BelongsToAccountInterface {
   constructor(
     public readonly id: string | undefined,
     public name: string,

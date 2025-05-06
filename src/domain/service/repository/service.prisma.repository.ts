@@ -8,6 +8,14 @@ import { ServiceMapper } from '../mapper/service.mapper';
 export class ServicePrismaRepository implements ServiceRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  async exists(id: string): Promise<boolean> {
+    const found = await this.prisma.service.findFirst({
+      where: { id },
+    });
+
+    return found !== null;
+  }
+
   async create(service: Service): Promise<Service> {
     const created = await this.prisma.service.create({
       data: ServiceMapper.toPrisma(service),
@@ -26,7 +34,17 @@ export class ServicePrismaRepository implements ServiceRepository {
   }
 
   async findById(id: string): Promise<Service | null> {
-    const found = await this.prisma.service.findFirst({ where: { id } });
+    const found = await this.prisma.service.findFirst({
+      where: { id },
+      include: {
+        establishment: {
+          include: {
+            account: true,
+          },
+        },
+      },
+    });
+
     return found ? ServiceMapper.fromPrisma(found) : null;
   }
 

@@ -1,6 +1,6 @@
 import { EstablishmentRepository } from '../../domain/establishment/repository/establishment.repository.interface';
 import { Establishment } from '../../domain/establishment/entities/establishment.entity';
-import { Finder } from '../interfaces/finder.interface';
+import { Finder } from '../../domain/interfaces/finder.interface';
 
 export class FindEstablishmentUseCase implements Finder{
   constructor(private readonly repository: EstablishmentRepository) {}

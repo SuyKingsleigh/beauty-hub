@@ -8,4 +8,6 @@ export interface ServiceRepository {
   findById(id: string): Promise<Service | null>;
 
   delete(id: string): Promise<Service | null>;
+
+  exists(id: string): Promise<boolean>;
 }

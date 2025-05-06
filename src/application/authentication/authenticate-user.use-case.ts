@@ -27,6 +27,7 @@ export class AuthenticateUserUseCase {
 
     const token = await this.jwt.generate({
       id: user.id,
+      accountId: user.accountId,
     });
 
     return { token };

@@ -86,6 +86,9 @@ export class EstablishmentPrismaRepository implements EstablishmentRepository {
       where: {
         id,
       },
+      include: {
+        account: true,
+      },
     });
 
     return found ? EstablishmentMapper.fromPrisma(found) : null;

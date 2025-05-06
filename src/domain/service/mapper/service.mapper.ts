@@ -54,6 +54,9 @@ export class ServiceMapper {
       service.createdAt,
       service.updatedAt,
       service.deletedAt,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-expect-error
+      service.establishment,
     );
   }
 }

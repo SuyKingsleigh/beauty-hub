@@ -1,7 +1,6 @@
 import { CreateEstablishmentInputDto } from '../dto/create-establishment.input.dto';
 import { Establishment } from '../../../domain/establishment/entities/establishment.entity';
 import { Account } from '../../../domain/account/entities/account.entity';
-import { LocationLinksMapper } from '../../../domain/establishment/mapper/location-links.mapper';
 import { LocationLinks } from '../../../domain/establishment/entities/location-links.entity';
 
 export class CreateEstablishmentInputMapper {

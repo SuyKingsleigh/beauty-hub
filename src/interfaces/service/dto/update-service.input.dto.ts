@@ -1,19 +1,19 @@
-import { IsNotEmpty, IsOptional, Matches } from 'class-validator';
+import { IsOptional, Matches } from 'class-validator';
 
-export class ServiceInputDto {
-  @IsNotEmpty()
+export class UpdateServiceInputDto {
+  @IsOptional()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @Matches(/^\d{1,5},\d{2}$/, {
     message: 'O preço deve estar no formato 999,99',
   })
   price: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   description: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   establishmentId: string;
 
   @IsOptional()
