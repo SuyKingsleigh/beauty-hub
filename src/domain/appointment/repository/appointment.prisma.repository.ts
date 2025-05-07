@@ -2,7 +2,9 @@ import { Appointment } from '../entities/appointment.entity';
 import { AppointmentRepository } from './appointment.repository.interface';
 import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
 import { AppointmentMapper } from '../mapper/appointment.mapper';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class AppointmentPrismaRepository implements AppointmentRepository {
   constructor(private readonly prisma: PrismaService) {}
 

@@ -3,6 +3,7 @@ import { AuthModule } from '../authentication/auth.module';
 import { PrismaService } from '../../infrastructure/prisma/prisma.service';
 import { AppointmentPrismaRepository } from './repository/appointment.prisma.repository';
 import { CreateAppointmentUseCase } from '../../application/appointment/create-appointment.use-case';
+import { AppointmentController } from '../../interfaces/appointment/appointment.controller';
 
 export const APPOINTMENT_REPOSITORY = 'AppointmentRepository';
 
@@ -20,6 +21,7 @@ export const APPOINTMENT_REPOSITORY = 'AppointmentRepository';
       inject: [APPOINTMENT_REPOSITORY],
     },
   ],
-  exports: [APPOINTMENT_REPOSITORY],
+  controllers: [AppointmentController],
+  exports: [APPOINTMENT_REPOSITORY, CreateAppointmentUseCase],
 })
 export class AppointmentModule {}
