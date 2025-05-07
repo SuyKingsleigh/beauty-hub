@@ -4,4 +4,6 @@ import { CustomerMapper } from '../mapper/customer.mapper';
 
 export interface CustomerRepository extends Crud<Customer> {
   mapper: CustomerMapper;
+
+  findByCpf(cpf: string): Promise<Customer | null>;
 }

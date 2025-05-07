@@ -89,7 +89,7 @@ model Service {
 model Customer {
   id   String @id @default(uuid())
   name String
-  cpf  String
+  cpf  String @unique
 
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt

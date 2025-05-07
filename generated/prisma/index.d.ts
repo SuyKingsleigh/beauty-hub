@@ -10078,16 +10078,16 @@ export namespace Prisma {
 
   export type CustomerWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    cpf?: string
     AND?: CustomerWhereInput | CustomerWhereInput[]
     OR?: CustomerWhereInput[]
     NOT?: CustomerWhereInput | CustomerWhereInput[]
     name?: StringFilter<"Customer"> | string
-    cpf?: StringFilter<"Customer"> | string
     createdAt?: DateTimeNullableFilter<"Customer"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Customer"> | Date | string | null
     deletedAt?: DateTimeNullableFilter<"Customer"> | Date | string | null
     Appointment?: AppointmentListRelationFilter
-  }, "id">
+  }, "id" | "cpf">
 
   export type CustomerOrderByWithAggregationInput = {
     id?: SortOrder

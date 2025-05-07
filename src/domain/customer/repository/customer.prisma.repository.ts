@@ -8,6 +8,16 @@ import { Injectable } from '@nestjs/common';
 export class CustomerPrismaRepository implements CustomerRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  async findByCpf(cpf: string): Promise<Customer | null> {
+    const found = await this.prisma.customer.findUnique({
+      where: { cpf },
+    });
+
+    if (!found) return null;
+
+    return this.mapper.fromPrisma(found);
+  }
+
   mapper = new CustomerMapper();
 
   async create(customer: Customer): Promise<Customer> {
