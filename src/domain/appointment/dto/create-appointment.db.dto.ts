@@ -1,6 +1,4 @@
-import { AppointmentService } from '../entities/appointment-service.entity';
-
-export interface CreateAppointmentDto {
+export interface CreateAppointmentDbDto {
   id: string | undefined;
   establishmentId: string;
   customerId: string;

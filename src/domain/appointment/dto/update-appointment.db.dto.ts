@@ -1,4 +1,4 @@
-export interface UpdateAppointmentDto {
+export interface UpdateAppointmentDbDto {
   establishmentId?: string;
   customerId?: string;
   userId?: string;

@@ -3,15 +3,15 @@ import {
   AppointmentServices,
 } from '../../../../generated/prisma';
 import { Appointment } from '../entities/appointment.entity';
-import { CreateAppointmentDto } from '../dto/create-appointment.dto';
-import { UpdateAppointmentDto } from '../dto/update-appointment.dto';
+import { CreateAppointmentDbDto } from '../dto/create-appointment.db.dto';
+import { UpdateAppointmentDbDto } from '../dto/update-appointment.db.dto';
 import { PrismaMapper } from '../../interfaces/prisma-mapper.interface';
 
 type PrismaAppointmentWithServices = PrismaAppointment & {
   services: AppointmentServices[];
 };
 
-type CreateAppointmentWithServices = CreateAppointmentDto & {
+type CreateAppointmentWithServices = CreateAppointmentDbDto & {
   services: {
     create: {
       serviceId: string;
@@ -25,7 +25,7 @@ export class AppointmentMapper
       PrismaAppointmentWithServices,
       Appointment,
       CreateAppointmentWithServices,
-      UpdateAppointmentDto
+      UpdateAppointmentDbDto
     >
 {
   fromPrisma(pa: PrismaAppointmentWithServices): Appointment {
@@ -75,7 +75,7 @@ export class AppointmentMapper
     };
   }
 
-  toPrismaPartial(appointment: Partial<Appointment>): UpdateAppointmentDto {
+  toPrismaPartial(appointment: Partial<Appointment>): UpdateAppointmentDbDto {
     return {
       serviceIds: appointment?.services?.map((s) => s.serviceId),
       establishmentId: appointment.establishmentId,
