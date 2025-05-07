@@ -5,6 +5,6 @@ export class UpdateServiceUseCase {
   constructor(private readonly repository: ServiceRepository) {}
 
   async update(id: string, service: Partial<Service>) {
-    return await this.repository.update(id, service);
+    return await this.repository.updatePartial(id, service);
   }
 }

@@ -1,3 +1,5 @@
+import { AppointmentService } from '../entities/appointment-service.entity';
+
 export interface CreateAppointmentDto {
   id: string | undefined;
   establishmentId: string;

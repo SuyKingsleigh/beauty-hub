@@ -11,12 +11,12 @@ export class Appointment {
     public userId: string,
     public status: string,
     public date: Date,
+    public readonly services: AppointmentService[],
     public readonly createdAt?: Date | null,
     public readonly updatedAt?: Date | null,
     public readonly deletedAt?: Date | null,
     public readonly establishment?: Establishment,
     public readonly customer?: Customer,
     public readonly user?: User,
-    public readonly services?: AppointmentService[],
   ) {}
 }

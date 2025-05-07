@@ -4,4 +4,5 @@ export interface UpdateAppointmentDto {
   userId?: string;
   status?: string;
   date?: Date;
+  serviceIds?: string[];
 }

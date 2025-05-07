@@ -8,8 +8,12 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
 
   async create(appointment: Appointment): Promise<Appointment> {
     const mapper = new AppointmentMapper();
+
     const created = await this.prisma.appointment.create({
       data: mapper.toPrisma(appointment),
+      include: {
+        services: true,
+      },
     });
 
     return mapper.fromPrisma(created);
@@ -43,7 +47,7 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
       data: mapper.toPrismaPartial(partial),
     });
 
-    return mapper.fromPrisma(updated);
+    return mapper.fromPrismaLazy(updated);
   }
 
   async delete(id: string): Promise<Appointment> {
@@ -54,7 +58,7 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
       where: { id },
     });
 
-    return new AppointmentMapper().fromPrisma(deleted);
+    return new AppointmentMapper().fromPrismaLazy(deleted);
   }
 
   async exists(id: string): Promise<boolean> {
