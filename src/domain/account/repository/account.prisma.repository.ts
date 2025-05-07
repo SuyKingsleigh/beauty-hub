@@ -7,6 +7,18 @@ import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
 export class AccountPrismaRepository implements AccountRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  updatePartial(id: string, partial: Partial<Account>): Promise<Account> {
+    throw new Error('Method not implemented.');
+  }
+
+  delete(id: string): Promise<Account> {
+    throw new Error('Method not implemented.');
+  }
+
+  async exists(id: string): Promise<boolean> {
+    return (await this.findById(id)) !== null;
+  }
+
   create(account: Account): Promise<Account> {
     return this.prisma.account.create({
       data: {

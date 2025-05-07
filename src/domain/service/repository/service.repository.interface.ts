@@ -1,9 +1,8 @@
 import { Service } from '../entities/service.entity';
+import { Crud } from '../../interfaces/crud.interface';
 
-export interface ServiceRepository {
+export interface ServiceRepository extends Crud<Service> {
   create(service: Service): Promise<Service>;
-
-  update(id: string, partial: Partial<Service>): Promise<Service>;
 
   findById(id: string): Promise<Service | null>;
 

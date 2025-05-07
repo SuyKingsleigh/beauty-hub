@@ -3,7 +3,9 @@ export interface Crud<T> {
 
   findById(id: string): Promise<T | null>;
 
-  update(id: string, data: any): Promise<T>;
+  updatePartial(id: string, partial: Partial<T>): Promise<T>;
 
   delete(id: string): Promise<T>;
+
+  exists(id: string): Promise<boolean>;
 }

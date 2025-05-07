@@ -1,6 +1,7 @@
 import { Establishment } from '../entities/establishment.entity';
+import { Crud } from '../../interfaces/crud.interface';
 
-export interface EstablishmentRepository {
+export interface EstablishmentRepository extends Crud<Establishment> {
   create(establishment: Establishment): Promise<Establishment>;
 
   updatePartial(

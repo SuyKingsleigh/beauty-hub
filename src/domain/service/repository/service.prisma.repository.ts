@@ -39,7 +39,7 @@ export class ServicePrismaRepository implements ServiceRepository {
     return ServiceMapper.fromPrisma(created);
   }
 
-  async update(id: string, partial: Partial<Service>): Promise<Service> {
+  async updatePartial(id: string, partial: Partial<Service>): Promise<Service> {
     const updated = await this.prisma.service.update({
       where: { id },
       data: ServiceMapper.toPrismaPartial(partial),
