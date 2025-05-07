@@ -10,6 +10,7 @@ export class Appointment {
     public customerId: string,
     public userId: string,
     public status: string,
+    public date: Date,
     public readonly createdAt?: Date | null,
     public readonly updatedAt?: Date | null,
     public readonly deletedAt?: Date | null,

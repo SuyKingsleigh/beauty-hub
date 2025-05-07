@@ -111,6 +111,7 @@ model Appointment {
   user   User   @relation(fields: [userId], references: [id])
 
   status String
+  date   DateTime
 
   createdAt DateTime?             @default(now())
   updatedAt DateTime?             @updatedAt

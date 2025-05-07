@@ -180,6 +180,7 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   customerId: 'customerId',
   userId: 'userId',
   status: 'status',
+  date: 'date',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'

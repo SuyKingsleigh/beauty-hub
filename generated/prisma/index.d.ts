@@ -7341,6 +7341,7 @@ export namespace Prisma {
     customerId: string | null
     userId: string | null
     status: string | null
+    date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
@@ -7352,6 +7353,7 @@ export namespace Prisma {
     customerId: string | null
     userId: string | null
     status: string | null
+    date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
@@ -7363,6 +7365,7 @@ export namespace Prisma {
     customerId: number
     userId: number
     status: number
+    date: number
     createdAt: number
     updatedAt: number
     deletedAt: number
@@ -7376,6 +7379,7 @@ export namespace Prisma {
     customerId?: true
     userId?: true
     status?: true
+    date?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
@@ -7387,6 +7391,7 @@ export namespace Prisma {
     customerId?: true
     userId?: true
     status?: true
+    date?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
@@ -7398,6 +7403,7 @@ export namespace Prisma {
     customerId?: true
     userId?: true
     status?: true
+    date?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
@@ -7482,6 +7488,7 @@ export namespace Prisma {
     customerId: string
     userId: string
     status: string
+    date: Date
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
@@ -7510,6 +7517,7 @@ export namespace Prisma {
     customerId?: boolean
     userId?: boolean
     status?: boolean
+    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -7526,6 +7534,7 @@ export namespace Prisma {
     customerId?: boolean
     userId?: boolean
     status?: boolean
+    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -7540,6 +7549,7 @@ export namespace Prisma {
     customerId?: boolean
     userId?: boolean
     status?: boolean
+    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -7554,12 +7564,13 @@ export namespace Prisma {
     customerId?: boolean
     userId?: boolean
     status?: boolean
+    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
   }
 
-  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "customerId" | "userId" | "status" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["appointment"]>
+  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "customerId" | "userId" | "status" | "date" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["appointment"]>
   export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
@@ -7592,6 +7603,7 @@ export namespace Prisma {
       customerId: string
       userId: string
       status: string
+      date: Date
       createdAt: Date | null
       updatedAt: Date | null
       deletedAt: Date | null
@@ -8027,6 +8039,7 @@ export namespace Prisma {
     readonly customerId: FieldRef<"Appointment", 'String'>
     readonly userId: FieldRef<"Appointment", 'String'>
     readonly status: FieldRef<"Appointment", 'String'>
+    readonly date: FieldRef<"Appointment", 'DateTime'>
     readonly createdAt: FieldRef<"Appointment", 'DateTime'>
     readonly updatedAt: FieldRef<"Appointment", 'DateTime'>
     readonly deletedAt: FieldRef<"Appointment", 'DateTime'>
@@ -9587,6 +9600,7 @@ export namespace Prisma {
     customerId: 'customerId',
     userId: 'userId',
     status: 'status',
+    date: 'date',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt'
@@ -10108,6 +10122,7 @@ export namespace Prisma {
     customerId?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
     status?: StringFilter<"Appointment"> | string
+    date?: DateTimeFilter<"Appointment"> | Date | string
     createdAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     deletedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
@@ -10123,6 +10138,7 @@ export namespace Prisma {
     customerId?: SortOrder
     userId?: SortOrder
     status?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
     deletedAt?: SortOrderInput | SortOrder
@@ -10141,6 +10157,7 @@ export namespace Prisma {
     customerId?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
     status?: StringFilter<"Appointment"> | string
+    date?: DateTimeFilter<"Appointment"> | Date | string
     createdAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     deletedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
@@ -10156,6 +10173,7 @@ export namespace Prisma {
     customerId?: SortOrder
     userId?: SortOrder
     status?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
     deletedAt?: SortOrderInput | SortOrder
@@ -10173,6 +10191,7 @@ export namespace Prisma {
     customerId?: StringWithAggregatesFilter<"Appointment"> | string
     userId?: StringWithAggregatesFilter<"Appointment"> | string
     status?: StringWithAggregatesFilter<"Appointment"> | string
+    date?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     createdAt?: DateTimeNullableWithAggregatesFilter<"Appointment"> | Date | string | null
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Appointment"> | Date | string | null
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Appointment"> | Date | string | null
@@ -10649,6 +10668,7 @@ export namespace Prisma {
   export type AppointmentCreateInput = {
     id?: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -10664,6 +10684,7 @@ export namespace Prisma {
     customerId: string
     userId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -10673,6 +10694,7 @@ export namespace Prisma {
   export type AppointmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10688,6 +10710,7 @@ export namespace Prisma {
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10700,6 +10723,7 @@ export namespace Prisma {
     customerId: string
     userId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -10708,6 +10732,7 @@ export namespace Prisma {
   export type AppointmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10719,6 +10744,7 @@ export namespace Prisma {
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11132,6 +11158,17 @@ export namespace Prisma {
     deletedAt?: SortOrder
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type CustomerScalarRelationFilter = {
     is?: CustomerWhereInput
     isNot?: CustomerWhereInput
@@ -11148,6 +11185,7 @@ export namespace Prisma {
     customerId?: SortOrder
     userId?: SortOrder
     status?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
@@ -11159,6 +11197,7 @@ export namespace Prisma {
     customerId?: SortOrder
     userId?: SortOrder
     status?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
@@ -11170,9 +11209,24 @@ export namespace Prisma {
     customerId?: SortOrder
     userId?: SortOrder
     status?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type AppointmentScalarRelationFilter = {
@@ -11589,6 +11643,10 @@ export namespace Prisma {
     connect?: AppointmentServicesWhereUniqueInput | AppointmentServicesWhereUniqueInput[]
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type EstablishmentUpdateOneRequiredWithoutAppointmentNestedInput = {
     create?: XOR<EstablishmentCreateWithoutAppointmentInput, EstablishmentUncheckedCreateWithoutAppointmentInput>
     connectOrCreate?: EstablishmentCreateOrConnectWithoutAppointmentInput
@@ -11797,6 +11855,31 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type AccountCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -11823,6 +11906,7 @@ export namespace Prisma {
   export type AppointmentCreateWithoutUserInput = {
     id?: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -11836,6 +11920,7 @@ export namespace Prisma {
     establishmentId: string
     customerId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -11906,6 +11991,7 @@ export namespace Prisma {
     customerId?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
     status?: StringFilter<"Appointment"> | string
+    date?: DateTimeFilter<"Appointment"> | Date | string
     createdAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     deletedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
@@ -12115,6 +12201,7 @@ export namespace Prisma {
   export type AppointmentCreateWithoutEstablishmentInput = {
     id?: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -12128,6 +12215,7 @@ export namespace Prisma {
     customerId: string
     userId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -12353,6 +12441,7 @@ export namespace Prisma {
   export type AppointmentCreateWithoutCustomerInput = {
     id?: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -12366,6 +12455,7 @@ export namespace Prisma {
     establishmentId: string
     userId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -12635,6 +12725,7 @@ export namespace Prisma {
   export type AppointmentCreateWithoutServicesInput = {
     id?: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -12649,6 +12740,7 @@ export namespace Prisma {
     customerId: string
     userId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -12702,6 +12794,7 @@ export namespace Prisma {
   export type AppointmentUpdateWithoutServicesInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12716,6 +12809,7 @@ export namespace Prisma {
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12761,6 +12855,7 @@ export namespace Prisma {
     establishmentId: string
     customerId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -12769,6 +12864,7 @@ export namespace Prisma {
   export type AppointmentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12782,6 +12878,7 @@ export namespace Prisma {
     establishmentId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12793,6 +12890,7 @@ export namespace Prisma {
     establishmentId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12924,6 +13022,7 @@ export namespace Prisma {
     customerId: string
     userId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -12967,6 +13066,7 @@ export namespace Prisma {
   export type AppointmentUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12980,6 +13080,7 @@ export namespace Prisma {
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12991,6 +13092,7 @@ export namespace Prisma {
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13017,6 +13119,7 @@ export namespace Prisma {
     establishmentId: string
     userId: string
     status: string
+    date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     deletedAt?: Date | string | null
@@ -13025,6 +13128,7 @@ export namespace Prisma {
   export type AppointmentUpdateWithoutCustomerInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13038,6 +13142,7 @@ export namespace Prisma {
     establishmentId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13049,6 +13154,7 @@ export namespace Prisma {
     establishmentId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
