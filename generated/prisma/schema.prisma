@@ -27,6 +27,8 @@ model User {
   // Relations
   accountId String
   account   Account @relation(fields: [accountId], references: [id])
+
+  Appointment Appointment[]
 }
 
 model Account {
@@ -63,6 +65,8 @@ model Establishment {
   accountId String
   account   Account   @relation(fields: [accountId], references: [id])
   Service   Service[]
+
+  Appointment Appointment[]
 }
 
 model Service {
@@ -78,5 +82,48 @@ model Service {
   deletedAt DateTime?
 
   establishmentId String
+  establishment   Establishment         @relation(fields: [establishmentId], references: [id])
+  appointments    AppointmentServices[]
+}
+
+model Customer {
+  id   String @id @default(uuid())
+  name String
+  cpf  String
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  Appointment Appointment[]
+}
+
+model Appointment {
+  id String @id @default(uuid())
+
+  establishmentId String
   establishment   Establishment @relation(fields: [establishmentId], references: [id])
+
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  status String
+
+  createdAt DateTime?             @default(now())
+  updatedAt DateTime?             @updatedAt
+  deletedAt DateTime?
+  services  AppointmentServices[]
+}
+
+model AppointmentServices {
+  appointmentId String
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
+
+  @@id([serviceId, appointmentId])
 }

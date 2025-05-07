@@ -165,6 +165,31 @@ exports.Prisma.ServiceScalarFieldEnum = {
   establishmentId: 'establishmentId'
 };
 
+exports.Prisma.CustomerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  cpf: 'cpf',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.AppointmentScalarFieldEnum = {
+  id: 'id',
+  establishmentId: 'establishmentId',
+  customerId: 'customerId',
+  userId: 'userId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.AppointmentServicesScalarFieldEnum = {
+  appointmentId: 'appointmentId',
+  serviceId: 'serviceId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -196,7 +221,10 @@ exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
   Establishment: 'Establishment',
-  Service: 'Service'
+  Service: 'Service',
+  Customer: 'Customer',
+  Appointment: 'Appointment',
+  AppointmentServices: 'AppointmentServices'
 };
 
 /**
