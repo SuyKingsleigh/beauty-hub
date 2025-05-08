@@ -40,6 +40,7 @@ export class AppointmentMapper
       pa.createdAt,
       pa.updatedAt,
       pa.deletedAt,
+      pa.establishment,
     );
   }
 

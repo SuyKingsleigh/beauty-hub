@@ -14,7 +14,14 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
     const created = await this.prisma.appointment.create({
       data: mapper.toPrisma(appointment),
       include: {
-        services: true,
+        services: {
+          include: {
+            service: true,
+          },
+          establishment: true,
+          user: true,
+          customer: true,
+        },
       },
     });
 
