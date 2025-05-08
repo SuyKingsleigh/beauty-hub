@@ -1,5 +1,5 @@
 import { EstablishmentOutputDto } from '../../establishment/dto/establishment-output.dto';
-import { UserDto } from '../../user/dto/user.dto';
+import { UserOutputDto } from '../../user/dto/user.output.dto';
 import { ServiceOutputDto } from '../../service/dto/service.output.dto';
 import { CustomerOutputDto } from '../../customer/dto/customer.output.dto';
 import { Appointment } from '../../../domain/appointment/entities/appointment.entity';
@@ -9,7 +9,7 @@ export class CreateAppointmentOutputDto {
   id: string;
   date: Date;
   establishment: EstablishmentOutputDto;
-  user: UserDto;
+  user: UserOutputDto;
   services: ServiceOutputDto[];
   customer: CustomerOutputDto;
 
@@ -17,7 +17,7 @@ export class CreateAppointmentOutputDto {
     this.id = appointment.id!;
     this.date = appointment.date;
     this.establishment = new EstablishmentOutputDto(appointment.establishment!);
-    this.user = new UserDto(appointment.user!);
+    this.user = new UserOutputDto(appointment.user!);
     this.services = appointment.services.map(
       (s) => new ServiceOutputDto(ServiceMapper.fromPrisma(s.service!)),
     );

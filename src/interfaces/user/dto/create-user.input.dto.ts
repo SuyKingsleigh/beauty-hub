@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { UniqueEmail } from '../../request-validator/unique-email.validator';
 
-export class CreateUserDto {
+export class CreateUserInputDto {
   @IsNotEmpty()
   name: string;
 

@@ -1,7 +1,7 @@
-import { UserDto } from '../../user/dto/user.dto';
+import { UserOutputDto } from '../../user/dto/user.output.dto';
 import { AccountDto } from './account.dto';
 
 export class CreateAccountAndFirstUserOutputDto {
-  user: UserDto;
+  user: UserOutputDto;
   account: AccountDto;
 }
