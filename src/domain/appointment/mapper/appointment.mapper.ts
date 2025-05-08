@@ -1,15 +1,24 @@
 import {
   Appointment as PrismaAppointment,
   AppointmentServices,
+  Establishment as PrismaEstablishment,
+  User as PrismaUser,
+  Customer as PrismaCustomer,
 } from '../../../../generated/prisma';
 import { Appointment } from '../entities/appointment.entity';
 import { CreateAppointmentDbDto } from '../dto/create-appointment.db.dto';
 import { UpdateAppointmentDbDto } from '../dto/update-appointment.db.dto';
 import { PrismaMapper } from '../../interfaces/prisma-mapper.interface';
+import { AppointmentService } from '../entities/appointment-service.entity';
+import { CreateAppointmentInputDto } from '../../../interfaces/appointment/dto/create-appointment.input.dto';
+import { EstablishmentMapper } from '../../establishment/mapper/establishment.mapper';
+import { CustomerMapper } from '../../customer/mapper/customer.mapper';
 
 type PrismaAppointmentWithServices = PrismaAppointment & {
   services: AppointmentServices[];
-};
+} & { user: PrismaUser } & {
+  establishment: PrismaEstablishment;
+} & { customer: PrismaCustomer };
 
 type CreateAppointmentWithServices = CreateAppointmentDbDto & {
   services: {
@@ -29,6 +38,7 @@ export class AppointmentMapper
     >
 {
   fromPrisma(pa: PrismaAppointmentWithServices): Appointment {
+    const customerMapper = new CustomerMapper();
     return new Appointment(
       pa.id,
       pa.establishmentId,
@@ -40,7 +50,9 @@ export class AppointmentMapper
       pa.createdAt,
       pa.updatedAt,
       pa.deletedAt,
-      pa.establishment,
+      EstablishmentMapper.fromPrisma(pa.establishment),
+      customerMapper.fromPrisma(pa.customer),
+      pa.user,
     );
   }
 
@@ -85,5 +97,17 @@ export class AppointmentMapper
       status: appointment.status,
       date: appointment.date,
     };
+  }
+
+  fromCreateAppointmentInputDto(dto: CreateAppointmentInputDto) {
+    return new Appointment(
+      undefined,
+      dto.establishmentId,
+      dto.customerId,
+      dto.userId,
+      dto.status,
+      new Date(dto.date),
+      dto.servicesId.map((serviceId) => new AppointmentService(serviceId)),
+    );
   }
 }

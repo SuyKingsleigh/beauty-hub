@@ -8,24 +8,24 @@ import { Injectable } from '@nestjs/common';
 export class AppointmentPrismaRepository implements AppointmentRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(appointment: Appointment): Promise<Appointment> {
-    const mapper = new AppointmentMapper();
+  private mapper: AppointmentMapper = new AppointmentMapper();
 
+  async create(appointment: Appointment): Promise<Appointment> {
     const created = await this.prisma.appointment.create({
-      data: mapper.toPrisma(appointment),
+      data: this.mapper.toPrisma(appointment),
       include: {
+        establishment: true,
+        user: true,
+        customer: true,
         services: {
           include: {
             service: true,
           },
-          establishment: true,
-          user: true,
-          customer: true,
         },
       },
     });
 
-    return mapper.fromPrisma(created);
+    return this.mapper.fromPrisma(created);
   }
 
   async findById(id: string): Promise<Appointment | null> {
@@ -34,7 +34,11 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
       include: {
         user: true,
         establishment: true,
-        services: true,
+        services: {
+          include: {
+            service: true,
+          },
+        },
         customer: true,
       },
     });
@@ -43,7 +47,27 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
       return null;
     }
 
-    return new AppointmentMapper().fromPrisma(found);
+    return this.mapper.fromPrisma(found);
+  }
+
+  async findByCustomerCPF(cpf: string): Promise<Appointment[]> {
+    const found = await this.prisma.appointment.findMany({
+      where: {
+        customer: { cpf },
+      },
+      include: {
+        user: true,
+        establishment: true,
+        services: {
+          include: {
+            service: true,
+          },
+        },
+        customer: true,
+      },
+    });
+
+    return found.map((a) => this.mapper.fromPrisma(a));
   }
 
   async updatePartial(
@@ -67,7 +91,7 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
       where: { id },
     });
 
-    return new AppointmentMapper().fromPrismaLazy(deleted);
+    return this.mapper.fromPrismaLazy(deleted);
   }
 
   async exists(id: string): Promise<boolean> {
