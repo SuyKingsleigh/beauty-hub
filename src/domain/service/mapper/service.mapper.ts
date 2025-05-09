@@ -7,6 +7,7 @@ export interface ServicePrismaCreateDto {
   name: string;
   price: number;
   description: string;
+  durationInMinutes: number;
   establishmentId: string;
   extraDetails?: Record<string, any> | undefined;
 }
@@ -16,6 +17,7 @@ export interface ServicePrismaUpdateDto {
   name?: string;
   price?: number;
   description?: string;
+  durationInMinutes?: number;
   establishmentId?: string;
   extraDetails?: Record<string, any> | undefined;
 }
@@ -27,6 +29,7 @@ export class ServiceMapper {
       name: service.name,
       price: service.price,
       description: service.description,
+      durationInMinutes: service.durationInMinutes,
       establishmentId: service.establishmentId,
       extraDetails: service.extraDetails,
     };
@@ -49,6 +52,7 @@ export class ServiceMapper {
       service.name,
       Number(service.price),
       service.description,
+      Number(service.durationInMinutes),
       service.establishmentId,
       isJsonObject(service.extraDetails) ? service.extraDetails : {},
       service.createdAt,

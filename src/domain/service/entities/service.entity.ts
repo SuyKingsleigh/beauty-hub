@@ -7,6 +7,7 @@ export class Service implements BelongsToEstablishmentInterface {
     public name: string,
     public price: number,
     public description: string,
+    public durationInMinutes: number,
     public establishmentId: string,
     public extraDetails?: Record<string, any> | undefined,
     public readonly createdAt?: Date | null,

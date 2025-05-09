@@ -158,6 +158,7 @@ exports.Prisma.ServiceScalarFieldEnum = {
   name: 'name',
   price: 'price',
   description: 'description',
+  durationInMinutes: 'durationInMinutes',
   extraDetails: 'extraDetails',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -191,6 +192,18 @@ exports.Prisma.AppointmentServicesScalarFieldEnum = {
   serviceId: 'serviceId'
 };
 
+exports.Prisma.UserWorkingHourScalarFieldEnum = {
+  id: 'id',
+  establishmentId: 'establishmentId',
+  userId: 'userId',
+  weekday: 'weekday',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -216,7 +229,15 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
-
+exports.Weekday = exports.$Enums.Weekday = {
+  sunday: 'sunday',
+  monday: 'monday',
+  tuesday: 'tuesday',
+  wednesday: 'wednesday',
+  thursday: 'thursday',
+  friday: 'friday',
+  saturday: 'saturday'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -225,7 +246,8 @@ exports.Prisma.ModelName = {
   Service: 'Service',
   Customer: 'Customer',
   Appointment: 'Appointment',
-  AppointmentServices: 'AppointmentServices'
+  AppointmentServices: 'AppointmentServices',
+  UserWorkingHour: 'UserWorkingHour'
 };
 
 /**

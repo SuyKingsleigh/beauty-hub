@@ -11,6 +11,9 @@ export class ServiceInputDto {
   price: string;
 
   @IsNotEmpty()
+  durationInMinutes: string;
+
+  @IsNotEmpty()
   description: string;
 
   @IsNotEmpty()

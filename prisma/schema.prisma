@@ -28,7 +28,8 @@ model User {
   accountId String
   account   Account @relation(fields: [accountId], references: [id])
 
-  Appointment Appointment[]
+  Appointment     Appointment[]
+  UserWorkingHour UserWorkingHour[]
 }
 
 model Account {
@@ -66,14 +67,16 @@ model Establishment {
   account   Account   @relation(fields: [accountId], references: [id])
   Service   Service[]
 
-  Appointment Appointment[]
+  Appointment     Appointment[]
+  UserWorkingHour UserWorkingHour[]
 }
 
 model Service {
-  id          String  @id @default(uuid())
-  name        String
-  price       Decimal @db.Decimal(10, 2)
-  description String
+  id                String  @id @default(uuid())
+  name              String
+  price             Decimal @db.Decimal(10, 2)
+  description       String
+  durationInMinutes Decimal @default(30)
 
   extraDetails Json?
 
@@ -127,4 +130,32 @@ model AppointmentServices {
   service   Service @relation(fields: [serviceId], references: [id])
 
   @@id([serviceId, appointmentId])
+}
+
+enum Weekday {
+  sunday
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
+  saturday
+}
+
+model UserWorkingHour {
+  id String @id @default(uuid())
+
+  establishmentId String
+  establishment   Establishment @relation(fields: [establishmentId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  weekday   Weekday
+  startTime String
+  endTime   String
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
 }

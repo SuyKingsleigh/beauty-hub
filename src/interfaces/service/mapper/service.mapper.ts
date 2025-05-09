@@ -9,6 +9,7 @@ export class ServiceMapper {
       dto.name,
       dto.getPriceAsFloat(),
       dto.description,
+      Number(dto.durationInMinutes),
       dto.establishmentId,
       dto.extraDetails,
     );
