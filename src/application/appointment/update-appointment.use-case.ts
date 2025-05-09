@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { AppointmentRepository } from '../../domain/appointment/repository/appointment.repository.interface';
 import { Appointment } from '../../domain/appointment/entities/appointment.entity';
 

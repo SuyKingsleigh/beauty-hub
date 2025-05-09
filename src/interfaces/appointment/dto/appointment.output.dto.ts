@@ -4,10 +4,12 @@ import { ServiceOutputDto } from '../../service/dto/service.output.dto';
 import { CustomerOutputDto } from '../../customer/dto/customer.output.dto';
 import { Appointment } from '../../../domain/appointment/entities/appointment.entity';
 import { ServiceMapper } from '../../../domain/service/mapper/service.mapper';
+import { Status } from '../../../../generated/prisma';
 
 export class CreateAppointmentOutputDto {
   id: string;
   date: Date;
+  status: Status;
   establishment: EstablishmentOutputDto;
   user: UserOutputDto;
   services: ServiceOutputDto[];
@@ -16,6 +18,7 @@ export class CreateAppointmentOutputDto {
   constructor(appointment: Appointment) {
     this.id = appointment.id!;
     this.date = appointment.date;
+    this.status = appointment.status;
     this.establishment = new EstablishmentOutputDto(appointment.establishment!);
     this.user = new UserOutputDto(appointment.user!);
     this.services = appointment.services.map(

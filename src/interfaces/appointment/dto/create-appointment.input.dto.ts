@@ -17,7 +17,6 @@ export class CreateAppointmentInputDto {
   @IsNotEmpty()
   userId: string;
 
-  @IsString()
   @IsNotEmpty()
   @IsEnum(Status)
   status: Status;

@@ -4,6 +4,7 @@ import {
   Establishment as PrismaEstablishment,
   User as PrismaUser,
   Customer as PrismaCustomer,
+  Status,
 } from '../../../../generated/prisma';
 import { Appointment } from '../entities/appointment.entity';
 import { CreateAppointmentDbDto } from '../dto/create-appointment.db.dto';
@@ -13,6 +14,7 @@ import { AppointmentService } from '../entities/appointment-service.entity';
 import { CreateAppointmentInputDto } from '../../../interfaces/appointment/dto/create-appointment.input.dto';
 import { EstablishmentMapper } from '../../establishment/mapper/establishment.mapper';
 import { CustomerMapper } from '../../customer/mapper/customer.mapper';
+import { UpdateAppointmentInputDto } from '../../../interfaces/appointment/dto/update-appointment.input.dto';
 
 type PrismaAppointmentWithServices = PrismaAppointment & {
   services: AppointmentServices[];
@@ -109,5 +111,24 @@ export class AppointmentMapper
       new Date(dto.date),
       dto.servicesId.map((serviceId) => new AppointmentService(serviceId)),
     );
+  }
+
+  fromUpdateAppointmentInputDto(dto: UpdateAppointmentInputDto) {
+    const date = dto.date ? new Date(dto.date) : undefined;
+    const services =
+      dto.servicesId && dto.servicesId.length > 0
+        ? dto.servicesId.map((serviceId) => new AppointmentService(serviceId))
+        : undefined;
+
+    const partial: Partial<Appointment> = {
+      establishmentId: dto.establishmentId,
+      customerId: dto.customerId,
+      userId: dto.userId,
+      status: dto.status,
+      date: date,
+      services: services,
+    };
+
+    return partial;
   }
 }
