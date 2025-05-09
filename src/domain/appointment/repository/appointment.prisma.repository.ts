@@ -71,6 +71,24 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
     return found.map((a) => this.mapper.fromPrisma(a));
   }
 
+  private async updateServicesInternal(
+    id: string,
+    partial: Partial<Appointment> & { services?: { serviceId: string }[] },
+  ): Promise<void> {
+    // 1. Remove os vínculos antigos
+    await this.prisma.appointmentServices.deleteMany({
+      where: { appointmentId: id },
+    });
+
+    // 2. Cria os novos vínculos
+    await this.prisma.appointmentServices.createMany({
+      data: partial.services!.map(({ serviceId }) => ({
+        appointmentId: id,
+        serviceId,
+      })),
+    });
+  }
+
   async updatePartial(
     id: string,
     partial: Partial<Appointment> & { services?: { serviceId: string }[] },
@@ -82,23 +100,12 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
     // Remove 'services' do prismaData se veio junto — evita o erro!
     delete prismaData.services;
 
-    // ⚙️ Atualiza AppointmentServices separadamente
+    // Atualiza AppointmentServices separadamente
     if (partial.services) {
-      // 1. Remove os vínculos antigos
-      await this.prisma.appointmentServices.deleteMany({
-        where: { appointmentId: id },
-      });
-
-      // 2. Cria os novos vínculos
-      await this.prisma.appointmentServices.createMany({
-        data: partial.services.map(({ serviceId }) => ({
-          appointmentId: id,
-          serviceId,
-        })),
-      });
+      await this.updateServicesInternal(id, partial);
     }
 
-    // ✅ Atualiza o Appointment sem mexer em 'services'
+    // Atualiza o Appointment sem mexer em 'services'
     const updated = await this.prisma.appointment.update({
       where: { id },
       data: prismaData,
