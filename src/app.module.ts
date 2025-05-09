@@ -7,6 +7,7 @@ import { EstablishmentModule } from './domain/establishment/establishment.module
 import { ServiceModule } from './domain/service/service.module';
 import { AppointmentModule } from './domain/appointment/appointment.module';
 import { CustomerModule } from './domain/customer/customer.module';
+import { SlotModule } from './domain/slot/slot.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CustomerModule } from './domain/customer/customer.module';
     ServiceModule,
     CustomerModule,
     AppointmentModule,
+    SlotModule,
   ],
   providers: [CurrentUserInterceptor],
 })

@@ -3,27 +3,75 @@ import { AppointmentRepository } from './appointment.repository.interface';
 import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
 import { AppointmentMapper } from '../mapper/appointment.mapper';
 import { Injectable } from '@nestjs/common';
-import { AppointmentService } from '../entities/appointment-service.entity';
+import { PaginationInputDto } from '../../../interfaces/pagination/pagination.input.dto';
 
 @Injectable()
 export class AppointmentPrismaRepository implements AppointmentRepository {
   constructor(private readonly prisma: PrismaService) {}
+
+  includeAllEntities = {
+    establishment: true,
+    user: true,
+    customer: true,
+    services: {
+      include: {
+        service: true,
+      },
+    },
+  };
+
+  async listByUserAndEstablishmentInRange(
+    userId: string,
+    establishmentId: string,
+    from: Date,
+    to: Date,
+  ): Promise<Appointment[]> {
+    const found = await this.prisma.appointment.findMany({
+      where: {
+        userId,
+        establishmentId,
+        date: {
+          gte: from,
+          lte: to,
+        },
+      },
+      include: this.includeAllEntities,
+    });
+
+    return found.map((a) => this.mapper.fromPrisma(a));
+  }
+
+  async listByUserInRange(
+    userId: string,
+    from: Date,
+    to: Date,
+    pagination: PaginationInputDto,
+  ): Promise<Appointment[]> {
+    const found = await this.prisma.appointment.findMany({
+      where: {
+        userId,
+        date: {
+          gte: from, //greater-than-equals (>=)
+          lte: to, // lower-than-equals
+        },
+      },
+      orderBy: {
+        date: 'asc',
+      },
+      skip: pagination.offset,
+      take: pagination.limit,
+      include: this.includeAllEntities,
+    });
+
+    return found.map((a) => this.mapper.fromPrisma(a));
+  }
 
   private mapper: AppointmentMapper = new AppointmentMapper();
 
   async create(appointment: Appointment): Promise<Appointment> {
     const created = await this.prisma.appointment.create({
       data: this.mapper.toPrisma(appointment),
-      include: {
-        establishment: true,
-        user: true,
-        customer: true,
-        services: {
-          include: {
-            service: true,
-          },
-        },
-      },
+      include: this.includeAllEntities,
     });
 
     return this.mapper.fromPrisma(created);
@@ -51,21 +99,12 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
     return this.mapper.fromPrisma(found);
   }
 
-  async findByCustomerCPF(cpf: string): Promise<Appointment[]> {
+  async listByCpf(cpf: string): Promise<Appointment[]> {
     const found = await this.prisma.appointment.findMany({
       where: {
         customer: { cpf },
       },
-      include: {
-        user: true,
-        establishment: true,
-        services: {
-          include: {
-            service: true,
-          },
-        },
-        customer: true,
-      },
+      include: this.includeAllEntities,
     });
 
     return found.map((a) => this.mapper.fromPrisma(a));
@@ -109,16 +148,7 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
     const updated = await this.prisma.appointment.update({
       where: { id },
       data: prismaData,
-      include: {
-        establishment: true,
-        user: true,
-        customer: true,
-        services: {
-          include: {
-            service: true,
-          },
-        },
-      },
+      include: this.includeAllEntities,
     });
 
     return mapper.fromPrisma(updated);

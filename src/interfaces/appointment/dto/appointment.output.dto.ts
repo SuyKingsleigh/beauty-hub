@@ -6,7 +6,7 @@ import { Appointment } from '../../../domain/appointment/entities/appointment.en
 import { ServiceMapper } from '../../../domain/service/mapper/service.mapper';
 import { Status } from '../../../../generated/prisma';
 
-export class CreateAppointmentOutputDto {
+export class AppointmentOutputDto {
   id: string;
   date: Date;
   status: Status;
@@ -25,5 +25,15 @@ export class CreateAppointmentOutputDto {
       (s) => new ServiceOutputDto(ServiceMapper.fromPrisma(s.service!)),
     );
     this.customer = new CustomerOutputDto(appointment.customer!);
+  }
+}
+
+export class ListAppointmentOutputDto {
+  totalItems: number;
+  data: AppointmentOutputDto[];
+
+  constructor(data: Appointment[]) {
+    this.totalItems = data.length;
+    this.data = data.map(a => new AppointmentOutputDto(a));
   }
 }
