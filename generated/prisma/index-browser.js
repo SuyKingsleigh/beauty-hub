@@ -229,6 +229,14 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+exports.Status = exports.$Enums.Status = {
+  created: 'created',
+  confirmed: 'confirmed',
+  canceled: 'canceled',
+  executed: 'executed',
+  missed: 'missed'
+};
+
 exports.Weekday = exports.$Enums.Weekday = {
   sunday: 'sunday',
   monday: 'monday',

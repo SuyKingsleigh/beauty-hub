@@ -58,7 +58,18 @@ export type UserWorkingHour = $Result.DefaultSelection<Prisma.$UserWorkingHourPa
  * Enums
  */
 export namespace $Enums {
-  export const Weekday: {
+  export const Status: {
+  created: 'created',
+  confirmed: 'confirmed',
+  canceled: 'canceled',
+  executed: 'executed',
+  missed: 'missed'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+
+export const Weekday: {
   sunday: 'sunday',
   monday: 'monday',
   tuesday: 'tuesday',
@@ -71,6 +82,10 @@ export namespace $Enums {
 export type Weekday = (typeof Weekday)[keyof typeof Weekday]
 
 }
+
+export type Status = $Enums.Status
+
+export const Status: typeof $Enums.Status
 
 export type Weekday = $Enums.Weekday
 
@@ -7544,7 +7559,7 @@ export namespace Prisma {
     establishmentId: string | null
     customerId: string | null
     userId: string | null
-    status: string | null
+    status: $Enums.Status | null
     date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7556,7 +7571,7 @@ export namespace Prisma {
     establishmentId: string | null
     customerId: string | null
     userId: string | null
-    status: string | null
+    status: $Enums.Status | null
     date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7691,7 +7706,7 @@ export namespace Prisma {
     establishmentId: string
     customerId: string
     userId: string
-    status: string
+    status: $Enums.Status
     date: Date
     createdAt: Date | null
     updatedAt: Date | null
@@ -7806,7 +7821,7 @@ export namespace Prisma {
       establishmentId: string
       customerId: string
       userId: string
-      status: string
+      status: $Enums.Status
       date: Date
       createdAt: Date | null
       updatedAt: Date | null
@@ -8242,7 +8257,7 @@ export namespace Prisma {
     readonly establishmentId: FieldRef<"Appointment", 'String'>
     readonly customerId: FieldRef<"Appointment", 'String'>
     readonly userId: FieldRef<"Appointment", 'String'>
-    readonly status: FieldRef<"Appointment", 'String'>
+    readonly status: FieldRef<"Appointment", 'Status'>
     readonly date: FieldRef<"Appointment", 'DateTime'>
     readonly createdAt: FieldRef<"Appointment", 'DateTime'>
     readonly updatedAt: FieldRef<"Appointment", 'DateTime'>
@@ -11058,6 +11073,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status[]'
+   */
+  export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Weekday'
    */
   export type EnumWeekdayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Weekday'>
@@ -11484,7 +11513,7 @@ export namespace Prisma {
     establishmentId?: StringFilter<"Appointment"> | string
     customerId?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
-    status?: StringFilter<"Appointment"> | string
+    status?: EnumStatusFilter<"Appointment"> | $Enums.Status
     date?: DateTimeFilter<"Appointment"> | Date | string
     createdAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
@@ -11519,7 +11548,7 @@ export namespace Prisma {
     establishmentId?: StringFilter<"Appointment"> | string
     customerId?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
-    status?: StringFilter<"Appointment"> | string
+    status?: EnumStatusFilter<"Appointment"> | $Enums.Status
     date?: DateTimeFilter<"Appointment"> | Date | string
     createdAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
@@ -11553,7 +11582,7 @@ export namespace Prisma {
     establishmentId?: StringWithAggregatesFilter<"Appointment"> | string
     customerId?: StringWithAggregatesFilter<"Appointment"> | string
     userId?: StringWithAggregatesFilter<"Appointment"> | string
-    status?: StringWithAggregatesFilter<"Appointment"> | string
+    status?: EnumStatusWithAggregatesFilter<"Appointment"> | $Enums.Status
     date?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     createdAt?: DateTimeNullableWithAggregatesFilter<"Appointment"> | Date | string | null
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Appointment"> | Date | string | null
@@ -12123,7 +12152,7 @@ export namespace Prisma {
 
   export type AppointmentCreateInput = {
     id?: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -12139,7 +12168,7 @@ export namespace Prisma {
     establishmentId: string
     customerId: string
     userId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -12149,7 +12178,7 @@ export namespace Prisma {
 
   export type AppointmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12165,7 +12194,7 @@ export namespace Prisma {
     establishmentId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12178,7 +12207,7 @@ export namespace Prisma {
     establishmentId: string
     customerId: string
     userId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -12187,7 +12216,7 @@ export namespace Prisma {
 
   export type AppointmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12199,7 +12228,7 @@ export namespace Prisma {
     establishmentId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12711,6 +12740,13 @@ export namespace Prisma {
     deletedAt?: SortOrder
   }
 
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -12766,6 +12802,16 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
+  }
+
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -13333,6 +13379,10 @@ export namespace Prisma {
     connect?: AppointmentServicesWhereUniqueInput | AppointmentServicesWhereUniqueInput[]
   }
 
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -13577,6 +13627,13 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -13586,6 +13643,16 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -13644,7 +13711,7 @@ export namespace Prisma {
 
   export type AppointmentCreateWithoutUserInput = {
     id?: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -13658,7 +13725,7 @@ export namespace Prisma {
     id?: string
     establishmentId: string
     customerId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -13761,7 +13828,7 @@ export namespace Prisma {
     establishmentId?: StringFilter<"Appointment"> | string
     customerId?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
-    status?: StringFilter<"Appointment"> | string
+    status?: EnumStatusFilter<"Appointment"> | $Enums.Status
     date?: DateTimeFilter<"Appointment"> | Date | string
     createdAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"Appointment"> | Date | string | null
@@ -14008,7 +14075,7 @@ export namespace Prisma {
 
   export type AppointmentCreateWithoutEstablishmentInput = {
     id?: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -14022,7 +14089,7 @@ export namespace Prisma {
     id?: string
     customerId: string
     userId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -14301,7 +14368,7 @@ export namespace Prisma {
 
   export type AppointmentCreateWithoutCustomerInput = {
     id?: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -14315,7 +14382,7 @@ export namespace Prisma {
     id?: string
     establishmentId: string
     userId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -14593,7 +14660,7 @@ export namespace Prisma {
 
   export type AppointmentCreateWithoutServicesInput = {
     id?: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -14608,7 +14675,7 @@ export namespace Prisma {
     establishmentId: string
     customerId: string
     userId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -14664,7 +14731,7 @@ export namespace Prisma {
 
   export type AppointmentUpdateWithoutServicesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14679,7 +14746,7 @@ export namespace Prisma {
     establishmentId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14883,7 +14950,7 @@ export namespace Prisma {
     id?: string
     establishmentId: string
     customerId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -14903,7 +14970,7 @@ export namespace Prisma {
 
   export type AppointmentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14917,7 +14984,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14929,7 +14996,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15099,7 +15166,7 @@ export namespace Prisma {
     id?: string
     customerId: string
     userId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -15157,7 +15224,7 @@ export namespace Prisma {
 
   export type AppointmentUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15171,7 +15238,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15183,7 +15250,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15243,7 +15310,7 @@ export namespace Prisma {
     id?: string
     establishmentId: string
     userId: string
-    status: string
+    status: $Enums.Status
     date: Date | string
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
@@ -15252,7 +15319,7 @@ export namespace Prisma {
 
   export type AppointmentUpdateWithoutCustomerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15266,7 +15333,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15278,7 +15345,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

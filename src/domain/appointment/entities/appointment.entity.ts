@@ -2,6 +2,7 @@ import { Establishment } from '../../establishment/entities/establishment.entity
 import { Customer } from '../../customer/entities/customer.entity';
 import { User } from '../../user/entities/user.entity';
 import { AppointmentService } from './appointment-service.entity';
+import { Status } from '../../../../generated/prisma';
 
 export class Appointment {
   constructor(
@@ -9,7 +10,7 @@ export class Appointment {
     public establishmentId: string,
     public customerId: string,
     public userId: string,
-    public status: string,
+    public status: Status,
     public date: Date,
     public readonly services: AppointmentService[],
     public readonly createdAt?: Date | null,

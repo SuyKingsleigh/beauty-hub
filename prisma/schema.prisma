@@ -101,6 +101,14 @@ model Customer {
   Appointment Appointment[]
 }
 
+enum Status {
+  created
+  confirmed
+  canceled
+  executed
+  missed
+}
+
 model Appointment {
   id String @id @default(uuid())
 
@@ -113,7 +121,7 @@ model Appointment {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  status String
+  status Status
   date   DateTime
 
   createdAt DateTime?             @default(now())

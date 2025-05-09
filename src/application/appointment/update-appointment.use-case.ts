@@ -3,10 +3,10 @@ import { AppointmentRepository } from '../../domain/appointment/repository/appoi
 import { Appointment } from '../../domain/appointment/entities/appointment.entity';
 
 @Injectable()
-export class CreateAppointmentUseCase {
+export class UpdateAppointmentUseCase {
   constructor(private readonly repository: AppointmentRepository) {}
 
-  async create(appointment: Appointment): Promise<Appointment> {
-    return this.repository.create(appointment);
+  async update(id: string, dto: Partial<Appointment>): Promise<Appointment> {
+    return await this.repository.updatePartial(id, dto);
   }
 }
