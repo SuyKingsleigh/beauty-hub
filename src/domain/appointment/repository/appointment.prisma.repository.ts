@@ -3,6 +3,7 @@ import { AppointmentRepository } from './appointment.repository.interface';
 import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
 import { AppointmentMapper } from '../mapper/appointment.mapper';
 import { Injectable } from '@nestjs/common';
+import { AppointmentService } from '../entities/appointment-service.entity';
 
 @Injectable()
 export class AppointmentPrismaRepository implements AppointmentRepository {
@@ -72,15 +73,48 @@ export class AppointmentPrismaRepository implements AppointmentRepository {
 
   async updatePartial(
     id: string,
-    partial: Partial<Appointment>,
+    partial: Partial<Appointment> & { services?: { serviceId: string }[] },
   ): Promise<Appointment> {
     const mapper = new AppointmentMapper();
+
+    const prismaData: any = mapper.toPrismaPartial(partial);
+
+    // Remove 'services' do prismaData se veio junto — evita o erro!
+    delete prismaData.services;
+
+    // ⚙️ Atualiza AppointmentServices separadamente
+    if (partial.services) {
+      // 1. Remove os vínculos antigos
+      await this.prisma.appointmentServices.deleteMany({
+        where: { appointmentId: id },
+      });
+
+      // 2. Cria os novos vínculos
+      await this.prisma.appointmentServices.createMany({
+        data: partial.services.map(({ serviceId }) => ({
+          appointmentId: id,
+          serviceId,
+        })),
+      });
+    }
+
+    // ✅ Atualiza o Appointment sem mexer em 'services'
     const updated = await this.prisma.appointment.update({
       where: { id },
-      data: mapper.toPrismaPartial(partial),
+      data: prismaData,
+      include: {
+        establishment: true,
+        user: true,
+        customer: true,
+        services: {
+          include: {
+            service: true,
+          },
+        },
+      },
     });
 
-    return mapper.fromPrismaLazy(updated);
+    return mapper.fromPrisma(updated);
   }
 
   async delete(id: string): Promise<Appointment> {

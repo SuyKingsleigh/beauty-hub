@@ -1,4 +1,5 @@
 import { Status } from '../../../../generated/prisma';
+import { AppointmentService } from '../entities/appointment-service.entity';
 
 export interface UpdateAppointmentDbDto {
   establishmentId?: string;
@@ -6,5 +7,5 @@ export interface UpdateAppointmentDbDto {
   userId?: string;
   status?: Status;
   date?: Date;
-  serviceIds?: string[];
+  services?: AppointmentService[];
 }

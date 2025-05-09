@@ -92,7 +92,7 @@ export class AppointmentMapper
 
   toPrismaPartial(appointment: Partial<Appointment>): UpdateAppointmentDbDto {
     return {
-      serviceIds: appointment?.services?.map((s) => s.serviceId),
+      services: appointment?.services,
       establishmentId: appointment.establishmentId,
       customerId: appointment.customerId,
       userId: appointment.userId,

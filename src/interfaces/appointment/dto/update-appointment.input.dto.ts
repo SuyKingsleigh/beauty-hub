@@ -1,34 +1,28 @@
-import {
-  IsArray,
-  IsDateString,
-  IsEnum,
-  IsString,
-} from 'class-validator';
+import { IsArray, IsDateString, IsEnum, IsOptional, IsString } from 'class-validator';
 import { Status } from '../../../../generated/prisma';
-import { Optional } from '@nestjs/common';
 
 export class UpdateAppointmentInputDto {
   @IsDateString()
-  @Optional()
+  @IsOptional()
   date?: string;
 
   @IsString()
-  @Optional()
+  @IsOptional()
   establishmentId?: string;
 
   @IsString()
-  @Optional()
+  @IsOptional()
   customerId?: string;
 
   @IsString()
-  @Optional()
+  @IsOptional()
   userId?: string;
 
-  @Optional()
+  @IsOptional()
   @IsEnum(Status)
   status?: Status;
 
   @IsArray()
-  @Optional()
+  @IsOptional()
   servicesId?: string[];
 }
