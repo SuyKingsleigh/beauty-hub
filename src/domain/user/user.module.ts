@@ -16,7 +16,6 @@ export const USER_REPOSITORY = 'UserRepository';
   providers: [
     PrismaService,
     UniqueEmailValidator,
-
     {
       provide: USER_REPOSITORY,
       useClass: UserPrismaRepository,

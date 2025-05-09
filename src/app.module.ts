@@ -8,6 +8,7 @@ import { ServiceModule } from './domain/service/service.module';
 import { AppointmentModule } from './domain/appointment/appointment.module';
 import { CustomerModule } from './domain/customer/customer.module';
 import { SlotModule } from './domain/slot/slot.module';
+import { UserWorkingHourModule } from './domain/user-working-hour/user-working-hour.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SlotModule } from './domain/slot/slot.module';
     CustomerModule,
     AppointmentModule,
     SlotModule,
+    UserWorkingHourModule,
   ],
   providers: [CurrentUserInterceptor],
 })

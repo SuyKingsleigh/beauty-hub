@@ -1,10 +1,12 @@
 import { FindAppointmentUseCase } from '../../application/appointment/find-appointment.use-case';
 import { SlotAvailabilityService } from '../../application/slot/slot-availability.service';
-import { Controller, Get, Inject, Query } from '@nestjs/common';
+import { Controller, Get, Inject, Query, UseGuards } from '@nestjs/common';
 import { AppointmentDurationCalculatorService } from '../../application/appointment/appointment-duration-calculator.service';
 import { ListSlotsQueryInputDto } from '../../application/slot/dto/list-slots.query.input.dto';
+import { JwtAuthGuard } from '../../application/authentication/jwt.guard';
 
 @Controller('slots')
+@UseGuards(JwtAuthGuard)
 export class SlotController {
   constructor(
     private readonly appointmentFinder: FindAppointmentUseCase,
@@ -34,6 +36,8 @@ export class SlotController {
       input.to,
       durations,
       input.duration,
+      input.userId,
+      input.establishmentId,
     );
   }
 }
