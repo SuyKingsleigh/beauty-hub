@@ -1,6 +1,8 @@
 import { ServiceRepository } from '../../domain/service/repository/service.repository.interface';
 import { Service } from '../../domain/service/entities/service.entity';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class UpdateServiceUseCase {
   constructor(private readonly repository: ServiceRepository) {}
 

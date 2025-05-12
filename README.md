@@ -6,14 +6,12 @@
 
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-![Static Badge](https://img.shields.io/badge/nest)
-
 ## Description
 
 Este projeto tem como intuito implementar um módulo de administração para gestão de estabelecimentos focado na área da
 beleza (barberias, salões de beleza etc).
 
-## Conhecimentos abordados
+## Conhecimentos técnicos abordados
 
 * JWT ✅
 * RestAPI ✅
@@ -22,9 +20,13 @@ beleza (barberias, salões de beleza etc).
 * NestJS ✅
 * Postgres✅
 * Prisma ✅
-* RabbitMQ🕒
+* RabbitMQ ✅
 * Redis 🕒
 * Docker 🕒
+
+## Conhecimentos teoricos abordados:
+- DDD
+- SOLID
 
 ### *.module.ts
 

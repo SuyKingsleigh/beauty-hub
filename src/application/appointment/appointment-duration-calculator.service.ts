@@ -6,6 +6,10 @@ export interface AppointmentWithDuration {
   durationInMinutes: number;
 }
 
+/**
+ * Responsável por simplificar um agendamento do ponto de vista de duração
+ * ou seja, a partir de um agendament, obtém sua data de inicio e calcula sua duração
+ */
 @Injectable()
 export class AppointmentDurationCalculatorService {
   private calculateAppointmentDuration(
