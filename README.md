@@ -8,83 +8,71 @@
 
 ## Description
 
-Este projeto tem como intuito implementar um módulo de administração para gestão de estabelecimentos focado na área da
-beleza (barberias, salões de beleza etc).
+This project aims to implement an administration module for managing establishments focused on the beauty industry (
+barbershops, beauty salons, etc.).
 
-## Conhecimentos técnicos abordados
+## Technical Concepts Covered
 
 * JWT ✅
 * RestAPI ✅
 * DDD ✅
 * SOLID ✅
 * NestJS ✅
-* Postgres✅
+* PostgreSQL ✅
 * Prisma ✅
 * RabbitMQ ✅
 * Redis 🕒
 * Docker 🕒
 
-## Conhecimentos teoricos abordados:
-- DDD
-- SOLID
+## Theoretical Concepts Covered
+
+- Domain-Driven Design (DDD)
+- SOLID Principles
 
 ### *.module.ts
 
-no nest js é possível fazer o inject via @Inject(ClassName)
-todavia, na maioria dos cenários está sendo usado, dentro do module, um json
-{ provide, useFactory, inject}, a vantagem é o maior desacoplamento, facilidade de escalabilidade e facilidade para
-testes
-também como o projeto segue o DDD, essa abordagem busca isolar o dominio de preocupações técnicas e de infra.
+In NestJS, it is possible to inject dependencies using `@Inject(ClassName)`.
+However, in most scenarios, the pattern `{ provide, useFactory, inject }` is used within modules.
+The advantage of this approach is greater decoupling, easier scalability, and improved testability.
+Since this project follows DDD principles, this method helps isolate the domain from technical and infrastructure
+concerns.
 
-## Project setup
+# 🏛 Project Architecture
 
-```bash
-$ yarn install
-```
+This project follows the principles of **Hexagonal Architecture (Ports & Adapters)**, with strong adherence to *
+*Domain-Driven Design (DDD)** and **SOLID** concepts.
 
-## Compile and run the project
+### Patterns and Best Practices
 
-```bash
-# development
-$ yarn run start
+- **DDD Applied**: Bounded Contexts, Aggregates, Entities, Value Objects.
+- **SOLID Principles**: Modular, cohesive, and maintainable code.
+- **Repository Pattern**: Full abstraction of the persistence layer.
 
-# watch mode
-$ yarn run start:dev
+### Authentication and Security
 
-# production mode
-$ yarn run start:prod
-```
+- **JWT Authentication**: Robust implementation with Refresh Token Strategy.
+- **Guards & Interceptors**: For authentication, authorization, and CurrentUser context.
+- **Custom Decorators**:
+    * `@CurrentUser` for automatic injection of the authenticated user.
+    * `UniqueCPF` for unique CPF
+    * `UniqueEmail` for unique user email.
+  
+### Data Persistence
 
-## Run tests
+- **Prisma ORM (PostgreSQL)**: Efficient object-relational mapping.
+- **Soft Delete Middleware**: Centralized logical deletion implemented via Prisma middleware.
 
-```bash
-# unit tests
-$ yarn run test
+### Asynchronous Integration and Communication
 
-# e2e tests
-$ yarn run test:e2e
+- **RabbitMQ Integration**: Asynchronous message delivery for email processing.
+- **Delivery Guarantee**: Message delivery confirmation and failure handling in publish/consume processes.
 
-# test coverage
-$ yarn run test:cov
-```
+### Infrastructure Utilities
 
-## Projeto
+- **Custom Pipes**: `@TransformToDto` for automatic mapping from Entities to DTOs.
+- **Pagination Utility**: Standardized pagination handling for REST endpoints.
 
-## Deployment
+### Others
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it
-runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more
-information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check
-out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment
-straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ yarn install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than
-managing infrastructure.
-
+- Modular architecture following NestJS best practices.
+- Clear separation between Application, Domain, Infrastructure, and Interface layers.
