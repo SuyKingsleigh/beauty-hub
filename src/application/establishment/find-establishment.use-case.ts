@@ -1,7 +1,9 @@
 import { EstablishmentRepository } from '../../domain/establishment/repository/establishment.repository.interface';
 import { Establishment } from '../../domain/establishment/entities/establishment.entity';
 import { Finder } from '../../domain/interfaces/finder.interface';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class FindEstablishmentUseCase implements Finder {
   constructor(private readonly repository: EstablishmentRepository) {}
 

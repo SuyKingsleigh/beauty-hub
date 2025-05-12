@@ -1,9 +1,10 @@
-import { IsDate, IsDateString, IsNumber, IsUUID, Min } from 'class-validator';
+import { IsDate, IsNumber, IsUUID, Min } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
 
 export class ListSlotsQueryInputDto {
   @IsUUID()
   establishmentId: string;
+
   @IsUUID()
   userId: string;
 

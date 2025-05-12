@@ -5,6 +5,11 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { FindUserWorkingHourUseCase } from '../user-working-hour/find-user-working-hour.use-case';
 import { Weekday } from 'generated/prisma';
 
+/**
+ * Com base na escala de um usuário (UserWorkingHours)
+ * Essa classe calcula os SLOTs de tempo de atendimento
+ * para que o cliente (customer) possa agendar seus servicos
+ */
 @Injectable()
 export class SlotAvailabilityService {
   constructor(
@@ -41,6 +46,7 @@ export class SlotAvailabilityService {
           weekday,
         );
 
+      // Usuario nao cadastrou escala para aquele dia da semana
       if (!workingHours.length) continue;
 
       // Filtra appointments para o dia atual
@@ -48,12 +54,14 @@ export class SlotAvailabilityService {
         this.isSameDay(appt.start, day),
       );
 
+      // analisa todas as ecalas daquele usuário naquele dia da semana naquele estabelecimento
       for (const work of workingHours) {
         const workStart = this.mergeDateWithTime(day, work.startTime); // inicio da escala
         const workEnd = this.mergeDateWithTime(day, work.endTime); // fim da escala
 
         let current = new Date(workStart);
 
+        // calcula os slots entre o inicio e o proximo agendamnto
         for (const appt of appointmentsOfDay) {
           const apptStart = appt.start;
           const apptEnd = this.calculateAppointmentEnd(appt);
@@ -65,6 +73,8 @@ export class SlotAvailabilityService {
           );
           slots.push(...available);
 
+          // verifica se o cursor deve se manter entre o current(inicio da escala atual)
+          // ou o fim do agendamento
           current = this.advanceCursor(current, apptEnd);
         }
 
@@ -144,10 +154,12 @@ export class SlotAvailabilityService {
     return addMinutes(appointment.start, appointment.durationInMinutes);
   }
 
+  // retorna a maior data entre as dadas
   private advanceCursor(current: Date, apptEnd: Date): Date {
     return max([current, apptEnd]);
   }
 
+  // gera os slots entre duas datas
   private generateSlotsBetween(from: Date, to: Date, duration: number): Slot[] {
     const slots: Slot[] = [];
     let current = new Date(from);

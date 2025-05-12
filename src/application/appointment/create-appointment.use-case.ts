@@ -6,6 +6,7 @@ import { AppointmentOutputDto } from '../../interfaces/appointment/dto/appointme
 import { DomainEventBus } from '../../domain/events/domain-event.bus';
 import { DOMAIN_EVENT_BUS } from '../../domain/events/consts';
 
+
 @Injectable()
 export class CreateAppointmentUseCase {
   constructor(

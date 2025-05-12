@@ -4,7 +4,6 @@ import {
   Establishment as PrismaEstablishment,
   User as PrismaUser,
   Customer as PrismaCustomer,
-  Status,
 } from '../../../../generated/prisma';
 import { Appointment } from '../entities/appointment.entity';
 import { CreateAppointmentDbDto } from '../dto/create-appointment.db.dto';
