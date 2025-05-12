@@ -38,12 +38,7 @@ export class AppointmentController {
   @Post()
   @TransformToDto(AppointmentOutputDto)
   async create(@Body() dto: CreateAppointmentInputDto) {
-    const validHour = await this.validator.validate(dto);
-
-    if (!validHour) {
-      throw new BadRequestException(`Hour already in use`);
-    }
-
+    await this.validator.validate(dto);
     return this.creator.create(this.mapper.fromCreateAppointmentInputDto(dto));
   }
 
