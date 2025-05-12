@@ -8,6 +8,17 @@ import { ServiceMapper } from '../mapper/service.mapper';
 export class ServicePrismaRepository implements ServiceRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  async findManyById(ids: string[]): Promise<Service[]> {
+    const found = await this.prisma.service.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+    });
+    return found.map((s) => ServiceMapper.fromPrisma(s));
+  }
+
   async findAll(accountId: string): Promise<Service[]> {
     const found = await this.prisma.service.findMany({
       where: {

@@ -11,4 +11,6 @@ export interface ServiceRepository extends Crud<Service> {
   exists(id: string): Promise<boolean>;
 
   findAll(accountId: string): Promise<Service[]>;
+
+  findManyById(ids: string[]): Promise<Service[]>;
 }

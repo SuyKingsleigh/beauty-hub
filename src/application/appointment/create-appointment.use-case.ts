@@ -6,7 +6,6 @@ import { AppointmentOutputDto } from '../../interfaces/appointment/dto/appointme
 import { DomainEventBus } from '../../domain/events/domain-event.bus';
 import { DOMAIN_EVENT_BUS } from '../../domain/events/consts';
 
-
 @Injectable()
 export class CreateAppointmentUseCase {
   constructor(
@@ -16,12 +15,12 @@ export class CreateAppointmentUseCase {
 
   async create(appointment: Appointment): Promise<Appointment> {
     const created = await this.repository.create(appointment);
-    this.triggerAppointmentCreated(created);
+    await this.triggerAppointmentCreated(created);
     return created;
   }
 
-  triggerAppointmentCreated(appointmentCreated: Appointment) {
-    this.trigger.publish(
+  async triggerAppointmentCreated(appointmentCreated: Appointment) {
+    await this.trigger.publish(
       Events.appointment_scheduled,
       new AppointmentOutputDto(appointmentCreated),
     );

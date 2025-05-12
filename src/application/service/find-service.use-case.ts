@@ -18,4 +18,8 @@ export class FindServiceUseCase implements Finder {
   async exists(id: string): Promise<boolean> {
     return await this.repository.exists(id);
   }
+
+  async findManyById(ids: string[]): Promise<Service[]> {
+    return await this.repository.findManyById(ids);
+  }
 }

@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -21,6 +22,7 @@ import { UpdateAppointmentInputDto } from './dto/update-appointment.input.dto';
 import { UpdateAppointmentUseCase } from '../../application/appointment/update-appointment.use-case';
 import { FindAppointmentUseCase } from '../../application/appointment/find-appointment.use-case';
 import { ListAppointmentsQueryInputDto } from './dto/list-appointment-query.input.dto';
+import { ValidAppointmentHourValidator } from './valid-appointment-hour.validator';
 
 @Controller('appointments')
 export class AppointmentController {
@@ -28,6 +30,7 @@ export class AppointmentController {
     private readonly creator: CreateAppointmentUseCase,
     private readonly updater: UpdateAppointmentUseCase,
     private readonly finder: FindAppointmentUseCase,
+    private readonly validator: ValidAppointmentHourValidator,
   ) {}
 
   private mapper = new AppointmentMapper();
@@ -35,6 +38,12 @@ export class AppointmentController {
   @Post()
   @TransformToDto(AppointmentOutputDto)
   async create(@Body() dto: CreateAppointmentInputDto) {
+    const validHour = await this.validator.validate(dto);
+
+    if (!validHour) {
+      throw new BadRequestException(`Hour already in use`);
+    }
+
     return this.creator.create(this.mapper.fromCreateAppointmentInputDto(dto));
   }
 

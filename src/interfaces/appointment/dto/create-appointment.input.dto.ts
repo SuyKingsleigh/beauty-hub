@@ -1,4 +1,10 @@
-import { IsArray, IsDateString, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsDateString,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+} from 'class-validator';
 import { Status } from '../../../../generated/prisma';
 
 export class CreateAppointmentInputDto {
