@@ -16,7 +16,7 @@ export class RabbitMqEventBus
   implements OnModuleInit, OnModuleDestroy, DomainEventBus
 {
   private connection: amqplib.Connection;
-  private channel: amqplib.ConfirmChannel; // asim teremos a garantia de entrega.
+  private channel: amqplib.ConfirmChannel;
   private logger = new Logger(RabbitMqEventBus.name);
 
   async onModuleInit() {
