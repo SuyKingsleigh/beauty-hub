@@ -8,6 +8,7 @@ import {
   Post,
   Query,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -26,6 +27,7 @@ import { ListAppointmentsQueryInputDto } from './dto/list-appointment-query.inpu
 import { ValidAppointmentHourValidator } from '../../application/appointment/valid-appointment-hour.validator';
 import { Status } from '../../../generated/prisma';
 import { JwtAuthGuard } from '../../application/authentication/jwt.guard';
+import { CacheQueryInterceptor } from '../interceptor/cache-query.interceptor';
 
 @Controller('appointments')
 @UseGuards(JwtAuthGuard)
@@ -73,6 +75,7 @@ export class AppointmentController {
   @Get('list')
   @UsePipes(new ValidationPipe({ transform: true }))
   @TransformToDto(ListAppointmentOutputDto)
+  @UseInterceptors(CacheQueryInterceptor)
   async listByUserAndDate(@Query() query: ListAppointmentsQueryInputDto) {
     const { userId, from, to } = query;
 
