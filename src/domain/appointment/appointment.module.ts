@@ -33,13 +33,14 @@ export const APPOINTMENT_REPOSITORY = 'AppointmentRepository';
     },
     {
       provide: UpdateAppointmentUseCase,
-      useFactory: (repository) => new UpdateAppointmentUseCase(repository),
-      inject: [APPOINTMENT_REPOSITORY],
+      useFactory: (repository, eventBus) =>
+        new UpdateAppointmentUseCase(repository, eventBus),
+      inject: [APPOINTMENT_REPOSITORY, DOMAIN_EVENT_BUS],
     },
     {
       provide: FindAppointmentUseCase,
       useFactory: (repository) => new FindAppointmentUseCase(repository),
-      inject: [APPOINTMENT_REPOSITORY, DOMAIN_EVENT_BUS],
+      inject: [APPOINTMENT_REPOSITORY],
     },
   ],
 

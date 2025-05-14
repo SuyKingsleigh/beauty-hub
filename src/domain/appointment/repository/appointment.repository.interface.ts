@@ -1,6 +1,7 @@
 import { Appointment } from '../entities/appointment.entity';
 import { Crud } from '../../interfaces/crud.interface';
 import { PaginationInputDto } from '../../../interfaces/pagination/pagination.input.dto';
+import { Status } from '../../../../generated/prisma';
 
 export interface AppointmentRepository extends Crud<Appointment> {
   create(appointment: Appointment): Promise<Appointment>;

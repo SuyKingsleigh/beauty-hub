@@ -4,6 +4,7 @@ import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
 import { AppointmentMapper } from '../mapper/appointment.mapper';
 import { Injectable } from '@nestjs/common';
 import { PaginationInputDto } from '../../../interfaces/pagination/pagination.input.dto';
+import { Status } from 'generated/prisma';
 
 @Injectable()
 export class AppointmentPrismaRepository implements AppointmentRepository {

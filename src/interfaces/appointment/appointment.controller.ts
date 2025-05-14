@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -22,6 +23,7 @@ import { UpdateAppointmentUseCase } from '../../application/appointment/update-a
 import { FindAppointmentUseCase } from '../../application/appointment/find-appointment.use-case';
 import { ListAppointmentsQueryInputDto } from './dto/list-appointment-query.input.dto';
 import { ValidAppointmentHourValidator } from './valid-appointment-hour.validator';
+import { Status } from '../../../generated/prisma';
 
 @Controller('appointments')
 export class AppointmentController {
@@ -47,10 +49,16 @@ export class AppointmentController {
     @Param('id') id: string,
     @Body() dto: UpdateAppointmentInputDto,
   ) {
-    return this.updater.update(
+    return await this.updater.update(
       id,
       this.mapper.fromUpdateAppointmentInputDto(dto),
     );
+  }
+
+  @Delete(':id')
+  @TransformToDto(AppointmentOutputDto)
+  async cancel(@Param('id') id: string) {
+    return await this.updater.updateStatus(id, Status.canceled);
   }
 
   @Get('list-by-cpf/:cpf')
