@@ -2,6 +2,7 @@ import { AppointmentRepository } from '../../domain/appointment/repository/appoi
 import { Appointment } from '../../domain/appointment/entities/appointment.entity';
 import { Injectable } from '@nestjs/common';
 import { PaginationInputDto } from '../../interfaces/pagination/pagination.input.dto';
+import { endOfDay, startOfDay } from 'date-fns';
 
 @Injectable()
 export class FindAppointmentUseCase {
@@ -22,6 +23,22 @@ export class FindAppointmentUseCase {
     to: Date,
   ): Promise<Appointment[]> {
     return await this.repository.listByUserAndEstablishmentInRange(
+      userId,
+      establishmentId,
+      from,
+      to,
+    );
+  }
+
+  async listByUserAndEstablishemntOnDay(
+    userId: string,
+    establishmentId: string,
+    day: Date,
+  ): Promise<Appointment[]> {
+    const from = startOfDay(day);
+    const to = endOfDay(day);
+
+    return await this.listByUserAndEstablishmentInRange(
       userId,
       establishmentId,
       from,

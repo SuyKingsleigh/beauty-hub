@@ -11,7 +11,7 @@ import { DomainEventBus } from '../events/domain-event.bus';
 import { RabbitMqModule } from '../../infrastructure/rabbit-mq/rabbit-mq.module';
 import { DOMAIN_EVENT_BUS } from '../events/consts';
 import { ServiceModule } from '../service/service.module';
-import { ValidAppointmentHourValidator } from '../../interfaces/appointment/valid-appointment-hour.validator';
+import { ValidAppointmentHourValidator } from '../../application/appointment/valid-appointment-hour.validator';
 
 export const APPOINTMENT_REPOSITORY = 'AppointmentRepository';
 

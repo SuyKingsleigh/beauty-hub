@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -22,10 +23,12 @@ import { UpdateAppointmentInputDto } from './dto/update-appointment.input.dto';
 import { UpdateAppointmentUseCase } from '../../application/appointment/update-appointment.use-case';
 import { FindAppointmentUseCase } from '../../application/appointment/find-appointment.use-case';
 import { ListAppointmentsQueryInputDto } from './dto/list-appointment-query.input.dto';
-import { ValidAppointmentHourValidator } from './valid-appointment-hour.validator';
+import { ValidAppointmentHourValidator } from '../../application/appointment/valid-appointment-hour.validator';
 import { Status } from '../../../generated/prisma';
+import { JwtAuthGuard } from '../../application/authentication/jwt.guard';
 
 @Controller('appointments')
+@UseGuards(JwtAuthGuard)
 export class AppointmentController {
   constructor(
     private readonly creator: CreateAppointmentUseCase,

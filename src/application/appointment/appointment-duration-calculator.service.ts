@@ -5,6 +5,7 @@ import { Service } from '../../domain/service/entities/service.entity';
 
 export interface AppointmentWithDuration {
   start: Date;
+  end?: Date;
   durationInMinutes: number;
 }
 
@@ -14,14 +15,15 @@ export interface AppointmentWithDuration {
  */
 @Injectable()
 export class AppointmentDurationCalculatorService {
-  private calculateAppointmentDuration(
+  calculateAppointmentDuration(
     appointment: Appointment,
   ): AppointmentWithDuration {
     let duration = 0;
     for (const service of appointment.services) {
       duration += Number(service.service!.durationInMinutes);
     }
-    return { start: appointment.date, durationInMinutes: duration };
+    const end = addMinutes(appointment.date, duration);
+    return { start: appointment.date, durationInMinutes: duration, end };
   }
 
   calculateListOfAppointmentDuration(
