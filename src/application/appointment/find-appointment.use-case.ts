@@ -30,7 +30,7 @@ export class FindAppointmentUseCase {
     );
   }
 
-  async listByUserAndEstablishemntOnDay(
+  async listByUserAndEstablishmentOnDay(
     userId: string,
     establishmentId: string,
     day: Date,

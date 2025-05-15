@@ -36,7 +36,7 @@ export class ValidAppointmentHourValidator {
 
     // busca os agendamentos daquele profissional naquele estabelecimento naquele dia
     const appointmentsGivenDay =
-      await this.appointmentFinder.listByUserAndEstablishemntOnDay(
+      await this.appointmentFinder.listByUserAndEstablishmentOnDay(
         dto.userId,
         dto.establishmentId,
         askedStartDate,
