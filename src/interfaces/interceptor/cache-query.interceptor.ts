@@ -43,7 +43,7 @@ export class CacheQueryInterceptor implements NestInterceptor {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       tap(async (response) => {
         this.logger.log(`saving to cache ${cacheKey}`);
-        await this.cacheManager.set(cacheKey, response, 15 * 1000); // Add `ttl` as object
+        await this.cacheManager.set(cacheKey, response, 5 * 1000); // Add `ttl` as object
       }),
     );
   }

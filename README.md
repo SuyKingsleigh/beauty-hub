@@ -21,8 +21,7 @@ barbershops, beauty salons, etc.).
 * PostgreSQL ✅
 * Prisma ✅
 * RabbitMQ ✅
-* Redis 🕒
-* Docker 🕒
+* Redis ✅
 
 ## Theoretical Concepts Covered
 
