@@ -9,8 +9,8 @@ import { redisStore } from 'cache-manager-ioredis-yet';
       useFactory: async () => ({
         store: await redisStore({
           host: 'localhost', // ou 'redis' se estiver em container
-          port: 6379,
-          ttl: 60, // segundos
+          port: 42042,
+          ttl: 15, // segundos
         }),
       }),
     }),

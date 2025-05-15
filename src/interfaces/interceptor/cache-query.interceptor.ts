@@ -26,7 +26,7 @@ export class CacheQueryInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest();
     const query = request.query;
 
-    const url = request.route.path;
+    const url = request.originalUrl;
     const method = request.method;
 
     // Criar uma chave hash única baseada na query e rota
@@ -43,7 +43,7 @@ export class CacheQueryInterceptor implements NestInterceptor {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       tap(async (response) => {
         this.logger.log(`saving to cache ${cacheKey}`);
-        await this.cacheManager.set(cacheKey, response, 5); // TTL 60s
+        await this.cacheManager.set(cacheKey, response, 15 * 1000); // Add `ttl` as object
       }),
     );
   }
