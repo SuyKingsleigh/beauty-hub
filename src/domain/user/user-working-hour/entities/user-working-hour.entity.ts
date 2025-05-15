@@ -1,6 +1,6 @@
-import { Weekday } from '../../../../generated/prisma';
-import { Establishment } from '../../establishment/entities/establishment.entity';
-import { User } from '../../user/entities/user.entity';
+import { Weekday } from '../../../../../generated/prisma';
+import { Establishment } from '../../../establishment/entities/establishment.entity';
+import { User } from '../../entities/user.entity';
 
 export class UserWorkingHour {
   constructor(

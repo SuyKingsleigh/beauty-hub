@@ -4,7 +4,7 @@ import {
   UserWorkingHour as PrismaUserWorkingHour,
 } from 'generated/prisma';
 import { UserWorkingHour } from '../entities/user-working-hour.entity';
-import { EstablishmentMapper } from '../../establishment/mapper/establishment.mapper';
+import { EstablishmentMapper } from '../../../establishment/mapper/establishment.mapper';
 
 export class UserWorkingHourMapper {
   static fromPrisma(

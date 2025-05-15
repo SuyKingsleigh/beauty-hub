@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../application/authentication/jwt.guard';
-import { CreateUserWorkingHourUseCase } from '../../application/user-working-hour/create-user-working-hour.use-case';
+import { CreateUserWorkingHourUseCase } from '../../application/user/user-working-hour/create-user-working-hour.use-case';
 import { CreateUserWorkingHourInputDto } from './dto/create-user-working-hour.input.dto';
 import { UserWorkingHourOutputDto } from './dto/user-working-hour.output.dto';
 import { TransformToDto } from '../transform/transform-to-dto.decorator';

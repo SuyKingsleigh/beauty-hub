@@ -1,7 +1,7 @@
 import { EstablishmentOutputDto } from '../../establishment/dto/establishment-output.dto';
 import { UserOutputDto } from '../../user/dto/user.output.dto';
 import { Weekday } from '../../../../generated/prisma';
-import { UserWorkingHour } from '../../../domain/user-working-hour/entities/user-working-hour.entity';
+import { UserWorkingHour } from '../../../domain/user/user-working-hour/entities/user-working-hour.entity';
 
 export class UserWorkingHourOutputDto {
   id: string;

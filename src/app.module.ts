@@ -7,13 +7,16 @@ import { EstablishmentModule } from './domain/establishment/establishment.module
 import { ServiceModule } from './domain/service/service.module';
 import { AppointmentModule } from './domain/appointment/appointment.module';
 import { CustomerModule } from './domain/customer/customer.module';
-import { SlotModule } from './domain/slot/slot.module';
-import { UserWorkingHourModule } from './domain/user-working-hour/user-working-hour.module';
+import { SlotModule } from './domain/user/user-working-hour/slot/slot.module';
+import { UserWorkingHourModule } from './domain/user/user-working-hour/user-working-hour.module';
 import { RabbitMqModule } from './infrastructure/rabbit-mq/rabbit-mq.module';
 import { RedisModule } from './infrastructure/redis/redis.module';
+import { GlobalHttpExceptionFilter } from './infrastructure/http/global-http-exception.filter';
+import { SentryModule } from '@sentry/nestjs/setup';
 
 @Module({
   imports: [
+    SentryModule.forRoot(),
     UserModule,
     AuthModule,
     AccountModule,
@@ -26,6 +29,6 @@ import { RedisModule } from './infrastructure/redis/redis.module';
     RabbitMqModule,
     RedisModule,
   ],
-  providers: [CurrentUserInterceptor],
+  providers: [CurrentUserInterceptor, GlobalHttpExceptionFilter],
 })
 export class AppModule {}

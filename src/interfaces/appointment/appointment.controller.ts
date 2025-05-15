@@ -84,4 +84,9 @@ export class AppointmentController {
       offset: query.offset,
     });
   }
+
+  @Get('/debug-sentry')
+  getError() {
+    throw new Error('My first Sentry error!');
+  }
 }
