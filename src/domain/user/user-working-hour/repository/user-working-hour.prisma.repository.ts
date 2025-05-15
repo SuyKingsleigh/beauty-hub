@@ -1,6 +1,6 @@
 import { UserWorkingHour } from '../entities/user-working-hour.entity';
 import { UserWorkingHourRepository } from './user-working-hour.repository.interface';
-import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
+import { PrismaService } from '../../../../infrastructure/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { UserWorkingHourMapper } from '../mapper/user-working-hour.mapper';
 import { Weekday } from 'generated/prisma';

@@ -7,9 +7,4 @@ export const Queues = {
   appointment_cancelled: 'appointment.cancelled',
 };
 
-export const Exchanges = {
-  appointment: 'appointment.exchange',
-};
-
-export type Exchange = (typeof Exchanges)[keyof typeof Exchanges];
 export type Queue = (typeof Queues)[keyof typeof Queues];

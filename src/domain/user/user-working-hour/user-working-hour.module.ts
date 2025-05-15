@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { PrismaService } from '../../infrastructure/prisma/prisma.service';
-import { CreateUserWorkingHourUseCase } from '../../application/user-working-hour/create-user-working-hour.use-case';
+import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
+import { CreateUserWorkingHourUseCase } from '../../../application/user/user-working-hour/create-user-working-hour.use-case';
 import { UserWorkingHourPrismaRepository } from './repository/user-working-hour.prisma.repository';
-import { UserWorkingHourController } from '../../interfaces/user-working-hour/user-working-hour.controller';
-import { FindUserWorkingHourUseCase } from '../../application/user-working-hour/find-user-working-hour.use-case';
+import { UserWorkingHourController } from '../../../interfaces/user-working-hour/user-working-hour.controller';
+import { FindUserWorkingHourUseCase } from '../../../application/user/user-working-hour/find-user-working-hour.use-case';
 
 export const USER_WORKING_HOUR_REPOSITORY = 'UserWorkingHourRepository';
 

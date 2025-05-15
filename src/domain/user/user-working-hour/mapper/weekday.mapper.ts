@@ -1,4 +1,4 @@
-import { Weekday } from '../../../../generated/prisma';
+import { Weekday } from '../../../../../generated/prisma';
 
 export class WeekdayMapper {
   static fromDate(date: Date): keyof typeof Weekday {

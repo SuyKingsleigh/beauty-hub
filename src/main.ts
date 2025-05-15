@@ -4,6 +4,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { useContainer } from 'class-validator';
 import { CurrentUserInterceptor } from './interfaces/authentication/current-user.interceptor';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { GlobalHttpExceptionFilter } from './infrastructure/http/global-http-exception.filter';
+import './instrument';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -29,7 +31,7 @@ async function bootstrap() {
   await app.startAllMicroservices();
 
   app.useGlobalInterceptors(app.get(CurrentUserInterceptor));
-
+  app.useGlobalFilters(app.get(GlobalHttpExceptionFilter));
   await app.listen(process.env.PORT ?? 3000);
 }
 

@@ -1,8 +1,8 @@
-import { Slot } from 'src/domain/slot/entities/slot.entity';
-import { AppointmentWithDuration } from '../appointment/appointment-duration-calculator.service';
+import { Slot } from 'src/domain/user/user-working-hour/slot/entities/slot.entity';
+import { AppointmentWithDuration } from '../../../appointment/appointment-duration-calculator.service';
 import { addMinutes, isBefore, max } from 'date-fns';
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { FindUserWorkingHourUseCase } from '../user-working-hour/find-user-working-hour.use-case';
+import { FindUserWorkingHourUseCase } from '../find-user-working-hour.use-case';
 import { Weekday } from 'generated/prisma';
 
 /**

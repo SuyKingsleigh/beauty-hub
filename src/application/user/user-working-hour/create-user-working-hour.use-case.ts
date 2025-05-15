@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { UserWorkingHourRepository } from '../../domain/user-working-hour/repository/user-working-hour.repository.interface';
-import { UserWorkingHour } from '../../domain/user-working-hour/entities/user-working-hour.entity';
+import { UserWorkingHourRepository } from '../../../domain/user/user-working-hour/repository/user-working-hour.repository.interface';
+import { UserWorkingHour } from '../../../domain/user/user-working-hour/entities/user-working-hour.entity';
 
 @Injectable()
 export class CreateUserWorkingHourUseCase {

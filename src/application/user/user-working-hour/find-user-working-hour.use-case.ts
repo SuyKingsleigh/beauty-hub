@@ -1,7 +1,7 @@
-import { UserWorkingHourRepository } from '../../domain/user-working-hour/repository/user-working-hour.repository.interface';
+import { UserWorkingHourRepository } from '../../../domain/user/user-working-hour/repository/user-working-hour.repository.interface';
 import { Injectable } from '@nestjs/common';
-import { Weekday } from '../../../generated/prisma';
-import { UserWorkingHour } from '../../domain/user-working-hour/entities/user-working-hour.entity';
+import { Weekday } from '../../../../generated/prisma';
+import { UserWorkingHour } from '../../../domain/user/user-working-hour/entities/user-working-hour.entity';
 
 @Injectable()
 export class FindUserWorkingHourUseCase {
