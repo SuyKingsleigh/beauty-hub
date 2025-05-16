@@ -5,7 +5,7 @@ import { Logger } from '@nestjs/common';
 
 const logger = new Logger('PrismaSentryMiddleware');
 
-export function sentryPrismaMiddleware(): Prisma.Middleware {
+export function sentryPrismaSlowQueryMonitorMiddleware(): Prisma.Middleware {
   return async (params, next) => {
     const start = Date.now();
     const result = await next(params);
