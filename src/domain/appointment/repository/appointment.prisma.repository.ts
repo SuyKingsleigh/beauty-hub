@@ -9,6 +9,18 @@ import { PaginationInputDto } from '../../../interfaces/pagination/pagination.in
 export class AppointmentPrismaRepository implements AppointmentRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  async listSlowAf(): Promise<Appointment[]> {
+    const found = await this.prisma.appointment.findMany({
+      where: {
+        id: {
+          contains: '7',
+        },
+      },
+    });
+    await new Promise((res) => setTimeout(res, 300)); // simula atraso proposital
+    return [];
+  }
+
   includeAllEntities = {
     establishment: true,
     user: true,
