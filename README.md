@@ -22,6 +22,7 @@ barbershops, beauty salons, etc.).
 * Prisma ✅
 * RabbitMQ ✅
 * Redis ✅
+* Sentry ✅
 
 ## Theoretical Concepts Covered
 
