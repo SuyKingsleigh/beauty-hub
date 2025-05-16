@@ -12,8 +12,8 @@ export function sentryPrismaMiddleware(): Prisma.Middleware {
     const duration = Date.now() - start;
     logger.log(`sentry middleware`);
 
-    if (duration > 200) {
-      const message = `${params.model}.${params.action} took ${duration}`;
+    if (duration > 2) {
+      const message = `${params.model}.${params.action} took ${duration}ms`;
       logger.log(message);
       Sentry.addBreadcrumb({
         category: 'prisma',
@@ -22,7 +22,7 @@ export function sentryPrismaMiddleware(): Prisma.Middleware {
           duration,
           action: params.action,
           model: params.model,
-          query: params,
+          query: JSON.stringify(params),
         },
         level: 'info',
       });
