@@ -1,7 +1,7 @@
 import {
   CreateUserInput,
   CreateUserUseCase,
-} from '../user/create-user.use-case';
+} from '../user/use-case/create-user.use-case';
 import { AccountRepository } from '../../domain/account/repository/account.repository.interface';
 import { Account } from '../../domain/account/entities/account.entity';
 import { User } from '../../domain/user/entities/user.entity';

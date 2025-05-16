@@ -1,6 +1,6 @@
 import { Controller, Inject, Get, UseGuards, Post, Body } from '@nestjs/common';
-import { CreateUserUseCase } from '../../application/user/create-user.use-case';
-import { FindUserUseCase } from '../../application/user/find-user.use-case';
+import { CreateUserUseCase } from '../../application/user/use-case/create-user.use-case';
+import { FindUserUseCase } from '../../application/user/use-case/find-user.use-case';
 import { JwtAuthGuard } from '../../application/authentication/jwt.guard';
 import { CurrentUser } from '../authentication/decorators/current-user.decorator';
 import { User } from '../../domain/user/entities/user.entity';

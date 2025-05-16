@@ -3,9 +3,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import {
   CreateUserInput,
   CreateUserUseCase,
-} from '../../application/user/create-user.use-case';
+} from '../../application/user/use-case/create-user.use-case';
 import { User } from '../../domain/user/entities/user.entity';
-import { FindUserUseCase } from '../../application/user/find-user.use-case';
+import { FindUserUseCase } from '../../application/user/use-case/find-user.use-case';
 
 const MOCK_CREATE_USER = {
   id: '9e61a2fd-8f29-4654-be01-15fb033397da',

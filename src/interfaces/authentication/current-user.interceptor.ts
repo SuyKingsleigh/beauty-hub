@@ -7,7 +7,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { FindUserUseCase } from '../../application/user/find-user.use-case';
+import { FindUserUseCase } from '../../application/user/use-case/find-user.use-case';
 
 /**
  * Intercepta um request antes de ser processado
