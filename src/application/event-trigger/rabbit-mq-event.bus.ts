@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import * as amqplib from 'amqplib';
 import { DomainEventBus } from '../../domain/events/domain-event.bus';
+import * as Sentry from '@sentry/node';
 
 /**
  * Caso de uso do barramento de eventos.
@@ -41,6 +42,15 @@ export class RabbitMqEventBus
         (err, ok) => {
           if (err) {
             this.logger.error('Erro ao publicar no RabbitMQ:', err);
+            Sentry.withScope((scope) => {
+              scope.setExtras({
+                context: 'RabbitMQ',
+                queue: queueName,
+                payload: payload,
+              });
+
+              Sentry.captureException(err);
+            });
             // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
             return reject(err);
           }

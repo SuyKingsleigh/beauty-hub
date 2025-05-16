@@ -1,6 +1,5 @@
 import { User } from '../../../domain/user/entities/user.entity';
 import { Account } from '../../../domain/account/entities/account.entity';
-import { HashGenerator } from '../../../domain/authentication/entities/hash-generator';
 import {
   CreateUserInput,
   CreateUserUseCase,
