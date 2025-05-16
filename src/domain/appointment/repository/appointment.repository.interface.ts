@@ -20,4 +20,6 @@ export interface AppointmentRepository extends Crud<Appointment> {
     to: Date,
     pagination: PaginationInputDto,
   ): Promise<Appointment[]>;
+
+  listSlowAf(): Promise<Appointment[]>;
 }

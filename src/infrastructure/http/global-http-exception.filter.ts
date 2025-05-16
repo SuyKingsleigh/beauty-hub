@@ -1,4 +1,10 @@
-import { ArgumentsHost, Catch, ExceptionFilter, Logger } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  Logger,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { SentryExceptionCaptured } from '@sentry/nestjs';
 import * as Sentry from '@sentry/node';
 
@@ -22,18 +28,20 @@ export class GlobalHttpExceptionFilter implements ExceptionFilter {
       ip: request.ip,
     };
 
-    const user = request.user;
-    if (user) {
-      Sentry.setUser({
-        id: user.id,
-        accountId: user.accountId,
+    if (!(exception instanceof UnauthorizedException)) {
+      const user = request.user;
+      if (user) {
+        Sentry.setUser({
+          id: user.id,
+          accountId: user.accountId,
+        });
+      }
+
+      Sentry.withScope((scope) => {
+        scope.setExtras(requestData);
+        Sentry.captureException(exception);
       });
     }
-
-    Sentry.withScope((scope) => {
-      scope.setExtras(requestData);
-      Sentry.captureException(exception);
-    });
 
     this.logger.error(`request ${request} failed`);
   }

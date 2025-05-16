@@ -16,6 +16,10 @@ export class FindAppointmentUseCase {
     return await this.repository.listByCpf(cpf);
   }
 
+  async listSlowAf(): Promise<Appointment[]> {
+    return await this.repository.listSlowAf();
+  }
+
   async listByUserAndEstablishmentInRange(
     userId: string,
     establishmentId: string,

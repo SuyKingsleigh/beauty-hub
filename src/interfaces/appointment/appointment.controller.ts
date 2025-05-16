@@ -87,6 +87,6 @@ export class AppointmentController {
 
   @Get('/debug-sentry')
   getError() {
-    throw new Error('My first Sentry error!');
+    return this.finder.listSlowAf();
   }
 }
