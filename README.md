@@ -54,8 +54,8 @@ This project follows the principles of **Hexagonal Architecture (Ports & Adapter
 - **Guards & Interceptors**: For authentication, authorization, and CurrentUser context.
 - **Custom Decorators**:
     * `@CurrentUser` for automatic injection of the authenticated user.
-    * `UniqueCPF` for unique CPF
-    * `UniqueEmail` for unique user email.
+    * `@UniqueCPF` for unique CPF
+    * `@UniqueEmail` for unique user email.
   
 ### Data Persistence
 
