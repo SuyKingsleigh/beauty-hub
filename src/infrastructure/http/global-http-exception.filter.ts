@@ -19,6 +19,7 @@ export class GlobalHttpExceptionFilter implements ExceptionFilter {
 
   @SentryExceptionCaptured()
   catch(exception: any, host: ArgumentsHost) {
+    this.logger.error(exception);
     const context = host.switchToHttp();
     const response = context.getResponse();
     const request = context.getRequest();
@@ -30,6 +31,7 @@ export class GlobalHttpExceptionFilter implements ExceptionFilter {
       exception instanceof ForbiddenException
     ) {
       response.status(exception.getStatus()).json(exception.getResponse());
+      return;
     }
 
     const errId = UUID();
