@@ -10,7 +10,6 @@ export function sentryPrismaSlowQueryMonitorMiddleware(): Prisma.Middleware {
     const start = Date.now();
     const result = await next(params);
     const duration = Date.now() - start;
-    logger.log(`sentry middleware`);
 
     if (duration > 200) {
       const message = `${params.model}.${params.action} took ${duration}ms`;

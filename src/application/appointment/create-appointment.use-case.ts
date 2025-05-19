@@ -22,7 +22,6 @@ export class CreateAppointmentUseCase {
 
   async create(dto: CreateAppointmentInputDto): Promise<Appointment> {
     await this.validateAppointment(dto);
-
     const appointment = this.mapper.fromCreateAppointmentInputDto(dto);
     const created = await this.repository.create(appointment);
     await this.triggerAppointmentCreated(created);
