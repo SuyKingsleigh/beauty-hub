@@ -1,5 +1,5 @@
-import { FindUserUseCase } from '../use-case/find-user.use-case';
-import { User } from '../../../domain/user/entities/user.entity';
+import { FindUserUseCase } from '../../src/application/user/use-case/find-user.use-case';
+import { User } from '../../src/domain/user/entities/user.entity';
 
 const mockUserRepository = {
   findById: jest.fn(),

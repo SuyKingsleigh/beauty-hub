@@ -49,6 +49,8 @@ export class SlotAvailabilityService {
       // Usuario nao cadastrou escala para aquele dia da semana
       if (!workingHours.length) continue;
 
+      this.logger.log(`found working hours: ${JSON.stringify(workingHours)}`);
+
       // Filtra appointments para o dia atual
       const appointmentsOfDay = sortedAppointments.filter((appt) =>
         this.isSameDay(appt.start, day),
@@ -64,18 +66,33 @@ export class SlotAvailabilityService {
         // calcula os slots entre o inicio e o proximo agendamnto
         for (const appt of appointmentsOfDay) {
           const apptStart = appt.start;
-          const apptEnd = this.calculateAppointmentEnd(appt);
+          const apptEnd = appt.end ?? this.calculateAppointmentEnd(appt);
+
+          this.logger.log(
+            `calculating slots from ${current} to ${apptStart} with duration ${slotDuration}`,
+          );
+
+          if (current === apptStart) {
+            this.logger.log(`jumping to end of appointment ${apptEnd}`);
+            current = apptEnd;
+            continue;
+          }
 
           const available = this.generateSlotsBetween(
             current,
             apptStart,
             slotDuration,
           );
+          this.logger.log(
+            `found ${JSON.stringify(available, undefined, 2)} \nfrom ${current} to ${apptStart} with duration ${slotDuration}`,
+          );
           slots.push(...available);
 
           // verifica se o cursor deve se manter entre o current(inicio da escala atual)
           // ou o fim do agendamento
+          this.logger.log(`advacing cursor from ${current} to ${apptEnd}`);
           current = this.advanceCursor(current, apptEnd);
+          this.logger.log(`cursor advanced to ${current}`);
         }
 
         const tail = this.generateSlotsBetween(current, workEnd, slotDuration);

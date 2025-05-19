@@ -1,11 +1,11 @@
-import { UserController } from './user.controller';
+import { UserController } from '../../src/interfaces/user/user.controller';
 import { Test, TestingModule } from '@nestjs/testing';
 import {
   CreateUserInput,
   CreateUserUseCase,
-} from '../../application/user/use-case/create-user.use-case';
-import { User } from '../../domain/user/entities/user.entity';
-import { FindUserUseCase } from '../../application/user/use-case/find-user.use-case';
+} from '../../src/application/user/use-case/create-user.use-case';
+import { User } from '../../src/domain/user/entities/user.entity';
+import { FindUserUseCase } from '../../src/application/user/use-case/find-user.use-case';
 
 const MOCK_CREATE_USER = {
   id: '9e61a2fd-8f29-4654-be01-15fb033397da',

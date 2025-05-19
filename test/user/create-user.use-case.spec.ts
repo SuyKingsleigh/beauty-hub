@@ -1,9 +1,9 @@
-import { User } from '../../../domain/user/entities/user.entity';
-import { Account } from '../../../domain/account/entities/account.entity';
+import { User } from '../../src/domain/user/entities/user.entity';
+import { Account } from '../../src/domain/account/entities/account.entity';
 import {
   CreateUserInput,
   CreateUserUseCase,
-} from '../use-case/create-user.use-case';
+} from '../../src/application/user/use-case/create-user.use-case';
 
 // Mocks
 const mockUserRepository = {
