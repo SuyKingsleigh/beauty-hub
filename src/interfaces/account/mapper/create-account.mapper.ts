@@ -3,7 +3,7 @@ import {
   CreateAccountAndUserUseCaseInput,
   CreateAccountInput,
 } from '../../../application/account/create-account.use-case';
-import { CreateUserInput } from '../../../application/user/create-user.use-case';
+import { CreateUserInput } from '../../../application/user/use-case/create-user.use-case';
 import { AccountDto } from '../dto/account.dto';
 import { UserOutputDto } from '../../user/dto/user.output.dto';
 import { User } from '../../../domain/user/entities/user.entity';

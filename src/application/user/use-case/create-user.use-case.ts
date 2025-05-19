@@ -1,7 +1,7 @@
 import { UserRepository } from 'src/domain/user/repository/user.repository.interface';
-import { User } from '../../domain/user/entities/user.entity';
-import { HashGenerator } from '../../domain/authentication/entities/hash-generator';
-import { Account } from '../../domain/account/entities/account.entity';
+import { User } from '../../../domain/user/entities/user.entity';
+import { HashGenerator } from '../../../domain/authentication/entities/hash-generator';
+import { Account } from '../../../domain/account/entities/account.entity';
 
 export interface CreateUserInput {
   name: string;

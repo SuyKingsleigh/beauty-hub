@@ -4,7 +4,16 @@ import { FindAppointmentUseCase } from './find-appointment.use-case';
 import { AppointmentDurationCalculatorService } from './appointment-duration-calculator.service';
 import { FindServiceUseCase } from '../service/find-service.use-case';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { areIntervalsOverlapping, Interval, isFuture } from 'date-fns';
+import {
+  areIntervalsOverlapping,
+  Interval,
+  isBefore,
+  isAfter,
+  isPast,
+} from 'date-fns';
+import { FindUserWorkingHourUseCase } from '../user/user-working-hour/find-user-working-hour.use-case';
+import { WeekdayMapper } from '../../domain/user/user-working-hour/mapper/weekday.mapper';
+import { DateUtils } from '../../utils/date.utils';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
@@ -13,16 +22,42 @@ export class ValidAppointmentHourValidator {
     protected readonly appointmentFinder: FindAppointmentUseCase,
     protected readonly serviceFinder: FindServiceUseCase,
     protected readonly calculator: AppointmentDurationCalculatorService,
+    protected readonly userWorkingHourFinder: FindUserWorkingHourUseCase,
   ) {}
 
-  private futureDate(date) {
-    return isFuture(date);
+  async matchesUserWorkingHour(dto: CreateAppointmentInputDto) {
+    const date = new Date(dto.date);
+    const workingHours =
+      await this.userWorkingHourFinder.findByUserIdAndEstablishmentIdAndWeekday(
+        dto.userId,
+        dto.establishmentId,
+        WeekdayMapper.fromDate(date),
+      );
+
+    if (!workingHours || workingHours.length === 0) {
+      throw new BadRequestException(`User does not work on that date`);
+    }
+
+    for (const work of workingHours) {
+      const workStart = DateUtils.mergeDateWithTime(date, work.startTime); // inicio da escala
+      const workEnd = DateUtils.mergeDateWithTime(date, work.endTime); // fim da escala
+
+      if (isBefore(date, workStart)) {
+        throw new BadRequestException(
+          `Date is before user's working hours ${workStart}`,
+        );
+      } else if (isAfter(date, workEnd)) {
+        throw new BadRequestException(
+          `Date is after user's working hours ${workEnd}`,
+        );
+      }
+    }
   }
 
-  async validate(dto: CreateAppointmentInputDto): Promise<void> {
+  async validDate(dto: CreateAppointmentInputDto): Promise<void> {
     const askedStartDate = new Date(dto.date);
     // nao permite datas passadas
-    if (!this.futureDate(askedStartDate)) {
+    if (isPast(askedStartDate)) {
       throw new BadRequestException('date must be future');
     }
 
