@@ -4,6 +4,7 @@ import { addMinutes, isBefore, max } from 'date-fns';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { FindUserWorkingHourUseCase } from '../find-user-working-hour.use-case';
 import { Weekday } from 'generated/prisma';
+import { DateUtils } from '../../../../utils/date.utils';
 
 /**
  * Com base na escala de um usuário (UserWorkingHours)
@@ -28,16 +29,15 @@ export class SlotAvailabilityService {
     establishmentId: string,
   ): Promise<Slot[]> {
     const slots: Slot[] = [];
-    const days = this.getDatesInRange(start, end);
+    const days = DateUtils.getDatesInRange(start, end);
     this.logger.log(
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `loading available slots from ${start} to ${end} given duration ${slotDuration} for userId ${userId} on establishmentId ${establishmentId}`,
     );
 
     const sortedAppointments = this.sortAppointments(appointments);
 
     for (const day of days) {
-      const weekday = this.getWeekdayFromDate(day);
+      const weekday = DateUtils.getWeekdayFromDate(day);
 
       const workingHours =
         await this.finder.findByUserIdAndEstablishmentIdAndWeekday(
@@ -53,13 +53,13 @@ export class SlotAvailabilityService {
 
       // Filtra appointments para o dia atual
       const appointmentsOfDay = sortedAppointments.filter((appt) =>
-        this.isSameDay(appt.start, day),
+        DateUtils.isSameDay(appt.start, day),
       );
 
       // analisa todas as ecalas daquele usuário naquele dia da semana naquele estabelecimento
       for (const work of workingHours) {
-        const workStart = this.mergeDateWithTime(day, work.startTime); // inicio da escala
-        const workEnd = this.mergeDateWithTime(day, work.endTime); // fim da escala
+        const workStart = DateUtils.mergeDateWithTime(day, work.startTime); // inicio da escala
+        const workEnd = DateUtils.mergeDateWithTime(day, work.endTime); // fim da escala
 
         let current = new Date(workStart);
 
@@ -101,62 +101,6 @@ export class SlotAvailabilityService {
     }
 
     return slots;
-  }
-
-  /**
-   * Retorna uma lista de datas (sem horário) entre `from` e `to`, inclusivo.
-   */
-  private getDatesInRange(from: Date, to: Date): Date[] {
-    const dates: Date[] = [];
-    const current = new Date(from);
-    current.setHours(0, 0, 0, 0);
-
-    const endDate = new Date(to);
-    endDate.setHours(0, 0, 0, 0);
-
-    while (current <= endDate) {
-      dates.push(new Date(current));
-      current.setDate(current.getDate() + 1);
-    }
-
-    return dates;
-  }
-
-  /**
-   * Verifica se duas datas estão no mesmo dia.
-   */
-  private isSameDay(date1: Date, date2: Date): boolean {
-    return (
-      date1.getFullYear() === date2.getFullYear() &&
-      date1.getMonth() === date2.getMonth() &&
-      date1.getDate() === date2.getDate()
-    );
-  }
-
-  /**
-   * Converte uma string HH:mm para um Date baseado numa data de referência.
-   */
-  private mergeDateWithTime(baseDate: Date, timeStr: string): Date {
-    const [hours, minutes] = timeStr.split(':').map(Number);
-    const result = new Date(baseDate);
-    result.setHours(hours, minutes, 0, 0);
-    return result;
-  }
-
-  /**
-   * Extrai o weekday (`monday`, `tuesday`, etc.) de uma data.
-   */
-  private getWeekdayFromDate(date: Date): Weekday {
-    const days: Weekday[] = [
-      'sunday',
-      'monday',
-      'tuesday',
-      'wednesday',
-      'thursday',
-      'friday',
-      'saturday',
-    ];
-    return days[date.getDay()];
   }
 
   private sortAppointments(

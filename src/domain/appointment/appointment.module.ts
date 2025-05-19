@@ -12,11 +12,12 @@ import { RabbitMqModule } from '../../infrastructure/rabbit-mq/rabbit-mq.module'
 import { DOMAIN_EVENT_BUS } from '../events/consts';
 import { ServiceModule } from '../service/service.module';
 import { ValidAppointmentHourValidator } from '../../application/appointment/valid-appointment-hour.validator';
+import { UserWorkingHourModule } from '../user/user-working-hour/user-working-hour.module';
 
 export const APPOINTMENT_REPOSITORY = 'AppointmentRepository';
 
 @Module({
-  imports: [AuthModule, RabbitMqModule, ServiceModule],
+  imports: [AuthModule, RabbitMqModule, ServiceModule, UserWorkingHourModule],
   providers: [
     PrismaService,
     AppointmentDurationCalculatorService,
@@ -27,8 +28,11 @@ export const APPOINTMENT_REPOSITORY = 'AppointmentRepository';
     },
     {
       provide: CreateAppointmentUseCase,
-      useFactory: (repository, eventBus: DomainEventBus) =>
-        new CreateAppointmentUseCase(repository, eventBus),
+      useFactory: (
+        repository,
+        eventBus: DomainEventBus,
+        validator: ValidAppointmentHourValidator,
+      ) => new CreateAppointmentUseCase(repository, eventBus, validator),
       inject: [APPOINTMENT_REPOSITORY, DOMAIN_EVENT_BUS],
     },
     {

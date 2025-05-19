@@ -36,7 +36,6 @@ export class AppointmentController {
     private readonly creator: CreateAppointmentUseCase,
     private readonly updater: UpdateAppointmentUseCase,
     private readonly finder: FindAppointmentUseCase,
-    private readonly validator: ValidAppointmentHourValidator,
   ) {}
 
   private mapper = new AppointmentMapper();
@@ -44,8 +43,7 @@ export class AppointmentController {
   @Post()
   @TransformToDto(AppointmentOutputDto)
   async create(@Body() dto: CreateAppointmentInputDto) {
-    await this.validator.validate(dto);
-    return this.creator.create(this.mapper.fromCreateAppointmentInputDto(dto));
+    return this.creator.create(dto);
   }
 
   @Patch(':id')
