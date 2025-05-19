@@ -24,7 +24,6 @@ import { UpdateAppointmentInputDto } from './dto/update-appointment.input.dto';
 import { UpdateAppointmentUseCase } from '../../application/appointment/update-appointment.use-case';
 import { FindAppointmentUseCase } from '../../application/appointment/find-appointment.use-case';
 import { ListAppointmentsQueryInputDto } from './dto/list-appointment-query.input.dto';
-import { ValidAppointmentHourValidator } from '../../application/appointment/valid-appointment-hour.validator';
 import { Status } from '../../../generated/prisma';
 import { JwtAuthGuard } from '../../application/authentication/jwt.guard';
 import { CacheQueryInterceptor } from '../interceptor/cache-query.interceptor';

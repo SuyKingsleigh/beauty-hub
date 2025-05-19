@@ -33,7 +33,11 @@ export const APPOINTMENT_REPOSITORY = 'AppointmentRepository';
         eventBus: DomainEventBus,
         validator: ValidAppointmentHourValidator,
       ) => new CreateAppointmentUseCase(repository, eventBus, validator),
-      inject: [APPOINTMENT_REPOSITORY, DOMAIN_EVENT_BUS],
+      inject: [
+        APPOINTMENT_REPOSITORY,
+        DOMAIN_EVENT_BUS,
+        ValidAppointmentHourValidator,
+      ],
     },
     {
       provide: UpdateAppointmentUseCase,

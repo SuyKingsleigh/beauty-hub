@@ -9,7 +9,7 @@ import {
   Interval,
   isBefore,
   isAfter,
-  isFuture,
+  isPast,
 } from 'date-fns';
 import { FindUserWorkingHourUseCase } from '../user/user-working-hour/find-user-working-hour.use-case';
 import { WeekdayMapper } from '../../domain/user/user-working-hour/mapper/weekday.mapper';
@@ -24,10 +24,6 @@ export class ValidAppointmentHourValidator {
     protected readonly calculator: AppointmentDurationCalculatorService,
     protected readonly userWorkingHourFinder: FindUserWorkingHourUseCase,
   ) {}
-
-  private futureDate(date) {
-    return isFuture(date);
-  }
 
   async matchesUserWorkingHour(dto: CreateAppointmentInputDto) {
     const date = new Date(dto.date);
@@ -47,9 +43,13 @@ export class ValidAppointmentHourValidator {
       const workEnd = DateUtils.mergeDateWithTime(date, work.endTime); // fim da escala
 
       if (isBefore(date, workStart)) {
-        throw new BadRequestException(`Date is before user's working hours`);
+        throw new BadRequestException(
+          `Date is before user's working hours ${workStart}`,
+        );
       } else if (isAfter(date, workEnd)) {
-        throw new BadRequestException(`Date is after user's working hours`);
+        throw new BadRequestException(
+          `Date is after user's working hours ${workEnd}`,
+        );
       }
     }
   }
@@ -57,7 +57,7 @@ export class ValidAppointmentHourValidator {
   async validDate(dto: CreateAppointmentInputDto): Promise<void> {
     const askedStartDate = new Date(dto.date);
     // nao permite datas passadas
-    if (!this.futureDate(askedStartDate)) {
+    if (isPast(askedStartDate)) {
       throw new BadRequestException('date must be future');
     }
 
